@@ -10,12 +10,13 @@ Completed   = Function Works as intended
 
 ### Sprint 1 Target SRS
 
-FR10 Ability to  Easily Update Info - Avaliable\
-FR9 Ability to Enter Info on First use - Avaliable\
-FR8 Email Verification - Avaliable \
-FR7 Log-in Capabilities - Avaliable \
-FR6 Registration Capabilites - Avaliable 
+FR10 Ability to  Easily Update Info - < Ryan > Avaliable\
+FR9 Ability to Enter Info on First use - < Jeremy > Avaliable\
+FR8 Email Verification - < Austin > Avaliable \
+FR7 Log-in Capabilities - < Marcel > Avaliable \
+FR6 Registration Capabilites - < Arek > Avaliable 
 
 ### Update Log
 Ryan West - 6/1/2021 - inital Readme.txt creation\
-Jeremy Cavallo - 6/2/2021 - Converted Readme.txt to README.md
+Jeremy Cavallo - 6/2/2021 - Converted Readme.txt to README.md \
+Ryan West - 6/3/2021 - sprint 1 Functions Assigned
