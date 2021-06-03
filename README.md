@@ -18,5 +18,5 @@ FR6 Registration Capabilites -<Arek> Avaliable
 
 ### Update Log
 Ryan West - 6/1/2021 - inital Readme.txt creation\
-Jeremy Cavallo - 6/2/2021 - Converted Readme.txt to README.md
+Jeremy Cavallo - 6/2/2021 - Converted Readme.txt to README.md \
 Ryan West - 6/3/2021 - sprint 1 Functions Assigned
