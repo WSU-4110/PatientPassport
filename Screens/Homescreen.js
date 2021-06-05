@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
   Image,
   StyleSheet,
-  TextInput,
 } from 'react-native';
+import ToggleableText from '../Components/ToggleableText.js';
 
 let personObj = {
   Name: '',
@@ -15,15 +15,8 @@ let personObj = {
 };
 
 const Homescreen = ({navigation}) => {
-  const [isEditing, setIsEditing] = useState(true);
-  const [nameState, setNameState] = useState('Enter Name');
-  const [addressState, setAddressState] = useState('Enter Address');
-  const [DOBState, setDOBState] = useState('Enter DOB');
-  const [phoneState, setPhoneState] = useState('Enter Phone Number');
-  const [emailState, setEmailState] = useState('Enter Email');
-  const [emergencyState, setEmergencyState] = useState(
-    'Enter Emergency Contact',
-  );
+  const [isEditingBasicInfo, setIsEditingBasicInfo] = useState(false);
+  const [isEditingInsurance, setIsEditingInsurance] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -43,38 +36,62 @@ const Homescreen = ({navigation}) => {
         }}>
         <View style={styles.basicInfo}>
           <Text style={styles.basicInfoHeader}>Basic Information</Text>
-          <ToggleableText type="Name" editable={isEditing} />
-          <ToggleableText type="Address" editable={isEditing} />
-          <ToggleableText type="Date of Birth" editable={isEditing} />
-          <ToggleableText type="Phone Number" editable={isEditing} />
-          <ToggleableText type="Email" editable={isEditing} />
-          <ToggleableText type="Emergency Contact" editable={isEditing} />
+          <ToggleableText type="Name" editable={isEditingBasicInfo} />
+          <ToggleableText type="Address" editable={isEditingBasicInfo} />
+          <ToggleableText type="Date of Birth" editable={isEditingBasicInfo} />
+          <ToggleableText type="Phone Number" editable={isEditingBasicInfo} />
+          <ToggleableText type="Email" editable={isEditingBasicInfo} />
+          <ToggleableText
+            type="Emergency Contact Name"
+            editable={isEditingBasicInfo}
+          />
+          <ToggleableText
+            type="Emergency Contact Phone"
+            editable={isEditingBasicInfo}
+          />
+          <ToggleableText
+            type="Emergency Contact Email"
+            editable={isEditingBasicInfo}
+          />
         </View>
         <TouchableOpacity
-          onPress={() => setIsEditing(!isEditing)}
+          onPress={() => setIsEditingBasicInfo(!isEditingBasicInfo)}
           style={styles.editButton}>
-          <Text>{isEditing ? 'Save' : 'Edit'}</Text>
+          <Text>{isEditingBasicInfo ? 'Save' : 'Edit'}</Text>
+        </TouchableOpacity>
+
+        <View style={styles.basicInfo}>
+          <Text style={styles.basicInfoHeader}>Insurance Information</Text>
+          <ToggleableText
+            type="Name of Insured Individual"
+            editable={isEditingInsurance}
+          />
+          <ToggleableText type="Date of Birth" editable={isEditingInsurance} />
+          <ToggleableText type="Employer" editable={isEditingInsurance} />
+          <ToggleableText type="Address" editable={isEditingInsurance} />
+          <ToggleableText
+            type="Primary Insurance Company"
+            editable={isEditingInsurance}
+          />
+          <ToggleableText type="Address" editable={isEditingInsurance} />
+          <ToggleableText type="Insured ID" editable={isEditingInsurance} />
+          <ToggleableText type="Contact" editable={isEditingInsurance} />
+          <ToggleableText type="Notes" editable={isEditingInsurance} />
+          <ToggleableText
+            type="Secondary Insurance"
+            editable={isEditingInsurance}
+          />
+          <ToggleableText type="Address" editable={isEditingInsurance} />
+          <ToggleableText type="Insured ID" editable={isEditingInsurance} />
+          <ToggleableText type="Contact" editable={isEditingInsurance} />
+          <ToggleableText type="Notes" editable={isEditingInsurance} />
+        </View>
+        <TouchableOpacity
+          onPress={() => setIsEditingInsurance(!isEditingInsurance)}
+          style={styles.editButton}>
+          <Text>{isEditingInsurance ? 'Save' : 'Edit'}</Text>
         </TouchableOpacity>
       </ScrollView>
-    </View>
-  );
-};
-
-const ToggleableText = props => {
-  const [text, setText] = useState('');
-  return (
-    <View style={styles.toggleableStyles}>
-      <Text style={{color: 'white'}}>{props.type}: </Text>
-      {props.editable ? (
-        <TextInput
-          style={styles.textInputStyles}
-          placeholder={`Enter ${props.type}`}
-          value={text}
-          onChangeText={text => setText(text)}
-        />
-      ) : (
-        <Text>{text}</Text>
-      )}
     </View>
   );
 };
@@ -94,7 +111,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   header: {
-    height: '10%',
+    height: 90,
     backgroundColor: '#001F3D',
     display: 'flex',
     alignItems: 'center',
@@ -111,7 +128,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     height: 70,
     width: 70,
-    left: 0,
+    right: 5,
   },
   scrollable: {
     backgroundColor: '#055772',
@@ -136,21 +153,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: '10%',
+    marginTop: 20,
     borderRadius: 10,
-  },
-  textInputStyles: {
-    borderWidth: 1,
-    color: 'white',
-    height: 40,
-    width: 200,
-    marginLeft: 10,
-  },
-  toggleableStyles: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: '10%',
   },
 });
 
