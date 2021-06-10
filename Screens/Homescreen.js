@@ -8,11 +8,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import ToggleableText from '../Components/ToggleableText.js';
-
-let personObj = {
-  Name: '',
-  Address: '',
-};
+import SideMenuToggle from '../Components/SideMenuToggle.js';
 
 const Homescreen = ({navigation}) => {
   const [isEditingBasicInfo, setIsEditingBasicInfo] = useState(false);
@@ -25,6 +21,7 @@ const Homescreen = ({navigation}) => {
           style={styles.upperLogo}
           source={require('../AppDesignDocs/PatientPassport_Logo.png')}
         />
+        <SideMenuToggle navigation={navigation} />
         <Text style={styles.headerText}>Patient Passport</Text>
       </View>
       <ScrollView
@@ -55,7 +52,9 @@ const Homescreen = ({navigation}) => {
           />
         </View>
         <TouchableOpacity
-          onPress={() => setIsEditingBasicInfo(!isEditingBasicInfo)}
+          onPress={() => {
+            setIsEditingBasicInfo(!isEditingBasicInfo);
+          }}
           style={styles.editButton}>
           <Text>{isEditingBasicInfo ? 'Save' : 'Edit'}</Text>
         </TouchableOpacity>

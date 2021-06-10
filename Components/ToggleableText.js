@@ -3,6 +3,7 @@ import {TextInput, Text, View} from 'react-native';
 
 const ToggleableText = props => {
   const [text, setText] = useState('');
+
   return (
     <View>
       <View
@@ -25,7 +26,9 @@ const ToggleableText = props => {
             }}
             placeholder={`Enter ${props.type}`}
             value={text}
-            onChangeText={text => setText(text)}
+            onChangeText={text => {
+              setText(text);
+            }}
           />
         ) : (
           <Text style={{color: 'white', marginBottom: 10}}>{text}</Text>
