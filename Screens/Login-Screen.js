@@ -1,79 +1,142 @@
-import React, { useState } from 'react';
-import {StatusBar, Image, Platform, StyleSheet, Text, TouchableOpacity, View, ActivityIndicator} from 'react-native';
+import React, {useState} from 'react';
+import {
+  StatusBar,
+  Image,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  ActivityIndicator,
+  Alert,
+} from 'react-native';
 
 import AppTextInput from './components/AppTextInput';
 import AppTextButton from './components/AppTextButton';
 
-
 import colors from './config/Colors';
-import logo from "./assets/img/PatientPassportLogo.png"
+import logo from './assets/img/PatientPassportLogo.png';
 
-function LoginScreen(props) {
+function LoginScreen({navigation}) {
   const [indicator, setIndicator] = useState(false);
   const [feilds, setFeilds] = useState([
     {
       id: 0,
-      placeHolder: "Email",
+      placeHolder: 'Email',
       value: '',
-      secure: false
+      secure: false,
     },
     {
       id: 1,
-      placeHolder: "Password",
+      placeHolder: 'Password',
       value: '',
-      secure: true
+      secure: true,
     },
   ]);
 
-const handleChange = (text, id) => {
+  const validateUser = (email, pass) => {
+    //Use this function to call to database
+    if (false) return true;
+    else {
+      Alert.alert('Error', 'User not found.', [{text: 'Try again'}]);
+      return false;
+    }
+  };
+
+  const handleChange = (text, id) => {
     const tempFeilds = [...feilds];
     tempFeilds[id].value = text;
     setFeilds(tempFeilds);
-  }
+  };
 
   const handleSubmit = async () => {
     let email = feilds[0].value;
     let password = feilds[1].value;
-  }
+    if (validateUser(email, password)) navigation.navigate('Homescreen');
+  };
 
-return (
+  return (
     <View style={styles.container}>
       <StatusBar style="light" backgroundColor={colors.MidnightBlue} />
 
       {/* Top container */}
-      <View style={{ backgroundColor: colors.MidnightBlue, width: "100%", flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} >
-        <View style={{ width: '100%', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start' }} >
-          <Image resizeMethod="auto" style={{ marginBottom: 40, width: 166, height: 130 }} source={logo} />
+      <View
+        style={{
+          backgroundColor: colors.MidnightBlue,
+          width: '100%',
+          flex: 1,
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <View
+          style={{
+            width: '100%',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+          }}>
+          <Image
+            resizeMethod="auto"
+            style={{marginBottom: 40, width: 166, height: 130}}
+            source={logo}
+          />
         </View>
-       </View>
+      </View>
 
-{indicator
-        ? <View style={{ marginTop: -56, borderTopLeftRadius: 64, backgroundColor: colors.lightGrey, width: "100%", flex: 1.8, flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} >
+      {indicator ? (
+        <View
+          style={{
+            marginTop: -56,
+            borderTopLeftRadius: 64,
+            backgroundColor: colors.lightGrey,
+            width: '100%',
+            flex: 1.8,
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
           <ActivityIndicator color={colors.MidnightBlue} size={48} />
         </View>
-        : <>
+      ) : (
+        <>
           {/* Bottom Contaienr */}
-          <View style={{ marginTop: -56, borderTopLeftRadius: 64, backgroundColor: colors.lightGrey, width: "100%", flex: 1.8, flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} >
-
-            <View style={{ marginTop: 52, width: "85%", alignItems: "center" }} >
-              <Text style={{ color: colors.MidnightBlue, fontSize: Platform.OS === "ios" ? 28 : 44 }} >Login</Text>
+          <View
+            style={{
+              marginTop: -56,
+              borderTopLeftRadius: 64,
+              backgroundColor: colors.lightGrey,
+              width: '100%',
+              flex: 1.8,
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <View style={{marginTop: 52, width: '85%', alignItems: 'center'}}>
+              <Text
+                style={{
+                  color: colors.MidnightBlue,
+                  fontSize: Platform.OS === 'ios' ? 28 : 44,
+                }}>
+                Login
+              </Text>
             </View>
 
- {/* Text feilds */}
-            {feilds.map((item, i) =>
-              <View key={i} style={{ marginTop: i == 0 ? 80 : 32, width: "85%" }} >
+            {/* Text feilds */}
+            {feilds.map((item, i) => (
+              <View key={i} style={{marginTop: i == 0 ? 80 : 32, width: '85%'}}>
                 <AppTextInput
                   placeHolder={item.placeHolder}
                   width="100%"
                   value={item.value}
-                  onChange={(text) => handleChange(text, item.id)}
+                  onChange={text => handleChange(text, item.id)}
                   secure={item.secure}
                 />
               </View>
-            )}
+            ))}
 
             {/* Login button */}
-            <View style={styles.loginButton} >
+            <View style={styles.loginButton}>
               <AppTextButton
                 name="LOGIN"
                 borderRadius={10.4}
@@ -83,18 +146,37 @@ return (
                 height={44}
               />
             </View>
-
           </View>
 
- {/* Login text */}
-          <View style={{ width: "100%", backgroundColor: colors.lightGrey }} >
-            <View style={{ marginBottom: 40, marginLeft: "7.5%", width: "85%", flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'center' }} >
-              <Text style={{ color: "grey", fontSize: 14 }} >Dont't have an account? </Text>
-              <TouchableOpacity onPress={() => console.log('signup')} ><Text style={{ color: colors.BabyBlue, fontWeight: "bold", fontSize: 14 }} >Sign Up</Text></TouchableOpacity>
+          {/* Login text */}
+          <View style={{width: '100%', backgroundColor: colors.lightGrey}}>
+            <View
+              style={{
+                marginBottom: 40,
+                marginLeft: '7.5%',
+                width: '85%',
+                flexDirection: 'row',
+                alignItems: 'flex-end',
+                justifyContent: 'center',
+              }}>
+              <Text style={{color: 'grey', fontSize: 14}}>
+                Dont't have an account?{' '}
+              </Text>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('Registration')}>
+                <Text
+                  style={{
+                    color: colors.BabyBlue,
+                    fontWeight: 'bold',
+                    fontSize: 14,
+                  }}>
+                  Sign Up
+                </Text>
+              </TouchableOpacity>
             </View>
           </View>
         </>
-      }
+      )}
     </View>
   );
 }
@@ -106,13 +188,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.lightGrey,
     alignItems: 'center',
     justifyContent: 'center',
-    width: "100%"
+    width: '100%',
   },
-  loginButton: { marginTop: 40, width: "85%", flex: 1, alignItems: "flex-end" }
-})
+  loginButton: {marginTop: 40, width: '85%', flex: 1, alignItems: 'flex-end'},
+});
 
 export default LoginScreen;
-
-
-
-

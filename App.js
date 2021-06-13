@@ -34,8 +34,8 @@ const App = () => {
             fontSize: 20,
           },
         }}>
-        <Drawer.Screen name="Homescreen" component={Homescreen} />
         <Drawer.Screen name="Login" component={LoginScreen} />
+        <Drawer.Screen name="Homescreen" component={Homescreen} />
         <Drawer.Screen name="Registration" component={RegistrationScreen} />
         <Drawer.Screen name="Initial Info" component={InitialInfoScreen} />
       </Drawer.Navigator>

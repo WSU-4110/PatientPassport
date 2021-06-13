@@ -12,15 +12,26 @@ import {
 } from 'react-native';
 let {height, width} = Dimensions.get('screen');
 
-const RegistrationScreen = () => {
+let loginCredentials = [];
+
+const handleSuccessfulRegistration = (name, email, pass) => {
+  //Use this function to push new data to registration database
+  loginCredentials.push({Name: name, Email: email, Pass: pass});
+  Alert.alert(loginCredentials[0].Name);
+};
+
+const RegistrationScreen = ({navigation}) => {
   let [name, setName] = useState('');
   let [email, setEmail] = useState('');
   let [pass, setPass] = useState('');
   let [cpass, setCpass] = useState('');
 
   const onSingup = () => {
-    if (name && email && pass && cpass)
-      Alert.alert('Success', 'Registered', [{text: 'OK'}]);
+    if (name && email && pass && cpass && pass === cpass) {
+      handleSuccessfulRegistration(name, email, pass);
+      navigation.navigate('Initial Info');
+    } else if (pass != cpass)
+      Alert.alert('Error', 'Passwords do not match', [{text: 'OK'}]);
     else Alert.alert('Error', 'All fields are required.', [{text: 'OK'}]);
   };
 
@@ -117,7 +128,9 @@ const RegistrationScreen = () => {
             alignItems: 'center',
           }}>
           <TouchableOpacity onPress={onSingup} style={styles.button}>
-            <Text style={{color: '#fff',fontSize:18,fontWeight:'bold'}}>Sign Up</Text>
+            <Text style={{color: '#fff', fontSize: 18, fontWeight: 'bold'}}>
+              Sign Up
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -151,4 +164,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
