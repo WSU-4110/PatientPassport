@@ -29,7 +29,7 @@ const [isEditingInitalInfo, setIsEditingInitalInfo] = useState(false);
                   <ToggleableText type="Gender" editable={isEditingInitalInfo} />
                   <ToggleableText type="Date of Birth" editable={isEditingInitalInfo} />
                   <ToggleableText type="Alergies" editable={isEditingInitalInfo} />
-                  <ToggleableText type="known Disabilites" editable={isEditingInitalInfo} />
+                  <ToggleableText type="Known Disabilites" editable={isEditingInitalInfo} />
                   <ToggleableText type="Known Vacinations" editable={isEditingInitalInfo} />
                   <ToggleableText type="Heart conditions" editable={isEditingInitalInfo} />
                   <ToggleableText type="currently taken medications" editable={isEditingInitalInfo} />
