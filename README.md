@@ -12,7 +12,7 @@ Completed   = Function Works as intended
 
 FR10 Ability to  Easily Update Info - < Ryan > Avaliable\
 FR9 Ability to Enter Info on First use - < Jeremy > Avaliable\
-FR8 Email Verification - < Austin > Avaliable \
+FR14 Search Function to Narrow-Down Info - < Austin > Avaliable \
 FR7 Log-in Capabilities - < Marcel > Avaliable \
 FR6 Registration Capabilites - < Arek > Avaliable 
 
