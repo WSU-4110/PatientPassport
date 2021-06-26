@@ -10,15 +10,9 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
+import auth from '@react-native-firebase/auth';
+
 let {height, width} = Dimensions.get('screen');
-
-let loginCredentials = [];
-
-const handleSuccessfulRegistration = (name, email, pass) => {
-  //Use this function to push new data to registration database
-  loginCredentials.push({Name: name, Email: email, Pass: pass});
-  Alert.alert(loginCredentials[0].Name);
-};
 
 const RegistrationScreen = ({navigation}) => {
   let [name, setName] = useState('');
@@ -26,10 +20,26 @@ const RegistrationScreen = ({navigation}) => {
   let [pass, setPass] = useState('');
   let [cpass, setCpass] = useState('');
 
+  // !-----------------------------
+  // !      BACKEND FUNCTION
+  // !-----------------------------
+  const handleSuccessfulRegistration = (email, pass) => {
+    //Pushed registration information to the database
+    auth()
+      .createUserWithEmailAndPassword(email, pass)
+      .then(() => {
+        navigation.navigate('Initial Info');
+      })
+      .catch(error => {
+        if (error.code === 'auth/email-already-in-use')
+          Alert.alert('Email already in use');
+        if (error.code === 'auth/invalid-email') Alert.alert('Invalid email');
+      });
+  };
+
   const onSingup = () => {
     if (name && email && pass && cpass && pass === cpass) {
-      handleSuccessfulRegistration(name, email, pass);
-      navigation.navigate('Initial Info');
+      handleSuccessfulRegistration(email, pass);
     } else if (pass != cpass)
       Alert.alert('Error', 'Passwords do not match', [{text: 'OK'}]);
     else Alert.alert('Error', 'All fields are required.', [{text: 'OK'}]);

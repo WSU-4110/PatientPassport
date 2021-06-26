@@ -17,6 +17,8 @@ import AppTextButton from './components/AppTextButton';
 import colors from './config/Colors';
 import logo from './assets/img/PatientPassportLogo.png';
 
+import auth from '@react-native-firebase/auth';
+
 function LoginScreen({navigation}) {
   const [indicator, setIndicator] = useState(false);
   const [feilds, setFeilds] = useState([
@@ -34,13 +36,26 @@ function LoginScreen({navigation}) {
     },
   ]);
 
+  // !-----------------------------
+  // !      BACKEND FUNCTION
+  // !-----------------------------
   const validateUser = (email, pass) => {
-    //Use this function to call to database
-    if (false) return true;
-    else {
-      Alert.alert('Error', 'User not found.', [{text: 'Try again'}]);
-      return false;
-    }
+    //Authenticates user from database
+    auth()
+      .signInWithEmailAndPassword(email, pass)
+      .then(() => {
+        navigation.navigate('Homescreen');
+      })
+      .catch(error => {
+        if (
+          error.code === 'auth/invalid-email' ||
+          error.code === 'auth/wrong-password'
+        )
+          Alert.alert('Invalid credentials.');
+        if (error.code === 'auth/user-not-found') Alert.alert('User not found');
+        if (error.code === 'auth/user-disabled')
+          Alert.alert('Account disabled');
+      });
   };
 
   const handleChange = (text, id) => {
@@ -52,7 +67,7 @@ function LoginScreen({navigation}) {
   const handleSubmit = async () => {
     let email = feilds[0].value;
     let password = feilds[1].value;
-    if (validateUser(email, password)) navigation.navigate('Homescreen');
+    validateUser(email, password);
   };
 
   return (
