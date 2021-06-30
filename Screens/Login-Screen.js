@@ -165,6 +165,32 @@ function LoginScreen({navigation}) {
 
           {/* Login text */}
           <View style={{width: '100%', backgroundColor: colors.lightGrey}}>
+
+        <View
+          style={{
+            marginBottom: 40,
+            marginLeft: '7.5%',
+            width: '85%',
+            flexDirection: 'row',
+            alignItems: 'flex-end',
+            justifyContent: 'center',
+          }}>
+          <Text style={{color: 'grey', fontSize: 14}}>
+            Forgot Password?{' '}
+          </Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Forgot')}>
+            <Text
+              style={{
+                color: colors.BabyBlue,
+                fontWeight: 'bold',
+                fontSize: 14,
+              }}>
+              Click Here
+            </Text>
+          </TouchableOpacity>
+        </View>
+
             <View
               style={{
                 marginBottom: 40,

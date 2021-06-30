@@ -14,6 +14,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import LoginScreen from './Screens/Login-Screen.js';
 import RegistrationScreen from './Screens/Registration-Screen.js';
 import InitialInfoScreen from './Screens/InitalInfo-Screen.js';
+import Forgot from './Screens/Forgot.js';
 import Homescreen from './Screens/Homescreen.js';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
@@ -38,6 +39,7 @@ const App = () => {
         <Drawer.Screen name="Homescreen" component={Homescreen} />
         <Drawer.Screen name="Registration" component={RegistrationScreen} />
         <Drawer.Screen name="Initial Info" component={InitialInfoScreen} />
+        <Drawer.Screen name="Forgot" component={Forgot} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
