@@ -158,26 +158,24 @@ function LoginScreen({navigation}) {
                 onSubmit={() => handleSubmit()}
                 backgroundColor={colors.MidnightBlue}
                 width="100%"
-                height={44}
+                height={45}
               />
             </View>
           </View>
 
           {/* Login text */}
           <View style={{width: '100%', backgroundColor: colors.lightGrey}}>
-
+        {/* Forgot Password Link */}
         <View
           style={{
-            marginBottom: 40,
+            marginBottom: 10,
             marginLeft: '7.5%',
             width: '85%',
             flexDirection: 'row',
             alignItems: 'flex-end',
             justifyContent: 'center',
           }}>
-          <Text style={{color: 'grey', fontSize: 14}}>
-            Forgot Password?{' '}
-          </Text>
+
           <TouchableOpacity
             onPress={() => navigation.navigate('Forgot')}>
             <Text
@@ -186,14 +184,15 @@ function LoginScreen({navigation}) {
                 fontWeight: 'bold',
                 fontSize: 14,
               }}>
-              Click Here
+              Forgot Password?
             </Text>
           </TouchableOpacity>
         </View>
-
+            
+            {/* Sign Up Link */}
             <View
               style={{
-                marginBottom: 40,
+                marginBottom: 20,
                 marginLeft: '7.5%',
                 width: '85%',
                 flexDirection: 'row',
