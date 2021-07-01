@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 
 import auth from '@react-native-firebase/auth';
+import logo from './assets/img/PatientPassportLogo.png';
 
 //setting variables for screen dimensions
 let {height, width} = Dimensions.get('screen');
@@ -47,9 +48,10 @@ const reset = async() => {
           alignItems: 'center',
        }}>
        <Image
-          source={require('../AppDesignDocs/PatientPassport_Logo.png')}
-          style={{height: height * 0.18, width: width * 0.5}}
-            />
+          resizeMethod="auto"
+          style={{marginBottom: 40, width: 166, height: 130}}
+          source={logo}
+        />
      </View>
      <View
        style={{
