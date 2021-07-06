@@ -1,106 +1,208 @@
 import React, {useState} from 'react';
-import {Text, View, ScrollView, TouchableOpacity, Image, StyleSheet,} from 'react-native';
+import {
+  Text,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  Alert,
+} from 'react-native';
 import ToggleableText from '../Components/ToggleableText.js';
 import SideMenuToggle from '../Components/SideMenuToggle.js';
-//import collections from '@react-native-firebase/collections' // the firebase collections that is meant to 
+import {firebase} from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 const InitialInfoScreen = ({navigation}) => {
-const [isEditingInitalInfo, setIsEditingInitalInfo] = useState(false);
+  const [isEditingInitalInfo, setIsEditingInitalInfo] = useState(false);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [gender, setGender] = useState('');
+  const [DOB, setDOB] = useState('');
+  const [allergies, setAllergies] = useState('');
+  const [knownDis, setKnownDis] = useState('');
+  const [vacc, setVacc] = useState('');
+  const [meds, setMeds] = useState('');
+  const [healthConditions, setHealthConditions] = useState('');
+  const [doctors, setDoctors] = useState('');
+  const [heart, setHeart] = useState('');
+  const [smoke, setSmoke] = useState('');
 
+  const storeData = () => {
+    firestore()
+      .collection('users')
+      .add({
+        firstName: firstName,
+        lastName: lastName,
+        gender: gender,
+        DOB: DOB,
+        allergies: allergies,
+        knownDis: knownDis,
+        vaccinations: vacc,
+        meds: meds,
+        healthConditions: healthConditions,
+        doctors: doctors,
+        heartConditions: heart,
+        smoke: smoke,
+      })
+      .then(() => {
+        Alert.alert('User added');
+      });
+  };
+
+  const updateFirstName = value => {
+    setFirstName(value);
+  };
+
+  const updateLastName = value => {
+    setLastName(value);
+  };
+
+  const updateGender = value => {
+    setGender(value);
+  };
+
+  const updateDOB = value => {
+    setDOB(value);
+  };
+
+  const updateAllergies = value => {
+    setAllergies(value);
+  };
+
+  const updateKnownDis = value => {
+    setKnownDis(value);
+  };
+
+  const updateVacc = value => {
+    setVacc(value);
+  };
+
+  const updateMeds = value => {
+    setMeds(value);
+  };
+
+  const updateHealthConditions = value => {
+    setHealthConditions(value);
+  };
+
+  const updateDoctors = value => {
+    setDoctors(value);
+  };
+
+  const updateHeart = value => {
+    setHeart(value);
+  };
+
+  const updateSmoke = value => {
+    setSmoke(value);
+  };
 
   return (
     <View style={styles.container}>
-          <View style={styles.header}>
-            <Image
-              style={styles.upperLogo}
-              source={require('../AppDesignDocs/PatientPassport_Logo.png')}
-            />
-            <SideMenuToggle navigation={navigation} />
-            <Text style={styles.headerText}>Patient Passport</Text>
-    </View>
-    // this is the static version of a how firebase registers a data object
-    var docData = {
-    Fullname: "" ,
-    Gender:"" ,
-    DOB: "",
-    Alergies: "",
-    Disabilites: "",
-    Vacinations: "",
-    Heart: "",
-    Medications:"" ,
-    Smoke: "",
-    DocLocations:"" ,
-    HealthFact1: "",
-    HealthFact2: "",
-    HealthFact3: "",};
-    // the identifier for the collection to tie to accounts
-    var Linker= {
-    Marker: "insertion of account"}; // for now i understood little of auth but was getting a understanding of how to connect the account here
-    // this was how to add a data object to a specified collection
-    // my testing ability is limited so i can only speculate on some things like the data connections
-    //
-    /*
+      <View style={styles.header}>
+        <Image
+          style={styles.upperLogo}
+          source={require('../AppDesignDocs/PatientPassport_Logo.png')}
+        />
+        <SideMenuToggle navigation={navigation} />
+        <Text style={styles.headerText}>Patient Passport</Text>
+      </View>
 
-    db.collection("data").doc(Linker.Marker).set(docData).then(() => {
-     // where the assign data would go
-        docData = {
-        Fullname: "" ,
-        Gender:"" ,
-        DOB: "",
-        Alergies: "",
-        Disabilites: "",
-        Vacinations: "",
-        Heart: "",
-        Medications:"" ,
-        Smoke: "",
-        DocLocations:"" ,
-        HealthFact1: "",
-        HealthFact2: "",
-        HealthFact3: "",}; //
-    console.log("Document Successfully Written!");
-    });*/
-
-    // this was another way how to add a object to the collection in this case "data" which doesn't exist in our firebase collections yet
-   // db.collection("data"). add({
-   // })
-    <ScrollView
+      <ScrollView
         style={styles.scrollable}
-                contentContainerStyle={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <View style={styles.basicInfo}>
-
-                  <Text style={styles.basicInfoHeader}>Inital Information</Text>
-                  <ToggleableText type="Full Name" editable={isEditingInitalInfo} />
-                  <ToggleableText type="Gender" editable={isEditingInitalInfo} />
-                  <ToggleableText type="Date of Birth" editable={isEditingInitalInfo} />
-                  <ToggleableText type="Alergies" editable={isEditingInitalInfo} />
-                  <ToggleableText type="Known Disabilites" editable={isEditingInitalInfo} />
-                  <ToggleableText type="Known Vacinations" editable={isEditingInitalInfo} />
-                  <ToggleableText type="Heart conditions" editable={isEditingInitalInfo} />
-                  <ToggleableText type="currently taken medications" editable={isEditingInitalInfo} />
-                  <ToggleableText type="Do You Smoke?" editable={isEditingInitalInfo} />
-                  <ToggleableText type="Known Doctors and locations" editable={isEditingInitalInfo} />
-                  <ToggleableText type="Any Additional Health Concerns #1" editable={isEditingInitalInfo} />
-                  <ToggleableText type="Any Additional Health Concerns #2" editable={isEditingInitalInfo} />
-                  <ToggleableText type="Any Additional Health Concerns #3" editable={isEditingInitalInfo} />
-
-
-                </View>
-                <TouchableOpacity
-                  onPress={() => {
-                    setIsEditingInitalInfo(!isEditingInitalInfo);
-                  }}
-                  style={styles.editButton}>
-                  <Text>{isEditingInitalInfo ? 'Save' : 'Edit'}</Text>
-                </TouchableOpacity>
-              </ScrollView>
-            </View>
-            // additonal content can be added
-          );
-        };
-
+        contentContainerStyle={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <View style={styles.basicInfo}>
+          <Text style={styles.basicInfoHeader}>Inital Information</Text>
+          <ToggleableText
+            type="First Name"
+            editable={isEditingInitalInfo}
+            callback={updateFirstName}
+          />
+          <ToggleableText
+            type="Last Name"
+            editable={isEditingInitalInfo}
+            callback={updateLastName}
+          />
+          <ToggleableText
+            type="Gender"
+            editable={isEditingInitalInfo}
+            callback={updateGender}
+          />
+          <ToggleableText
+            type="Date of Birth"
+            editable={isEditingInitalInfo}
+            callback={updateDOB}
+          />
+          <ToggleableText
+            type="Alergies"
+            editable={isEditingInitalInfo}
+            callback={updateAllergies}
+          />
+          <ToggleableText
+            type="Known Disabilites"
+            editable={isEditingInitalInfo}
+            callback={updateKnownDis}
+          />
+          <ToggleableText
+            type="Known Vaccinations"
+            editable={isEditingInitalInfo}
+            callback={updateVacc}
+          />
+          <ToggleableText
+            type="Heart conditions"
+            editable={isEditingInitalInfo}
+            callback={updateHeart}
+          />
+          <ToggleableText
+            type="currently taken medications"
+            editable={isEditingInitalInfo}
+            callback={updateMeds}
+          />
+          <ToggleableText
+            type="Do You Smoke?"
+            editable={isEditingInitalInfo}
+            callback={updateSmoke}
+          />
+          <ToggleableText
+            type="Known Doctors and locations"
+            editable={isEditingInitalInfo}
+            callback={updateDoctors}
+          />
+          <ToggleableText
+            type="Any Additional Health Concerns #1"
+            editable={isEditingInitalInfo}
+            callback={updateHealthConditions}
+          />
+          <ToggleableText
+            type="Any Additional Health Concerns #2"
+            editable={isEditingInitalInfo}
+            callback={updateHealthConditions}
+          />
+          <ToggleableText
+            type="Any Additional Health Concerns #3"
+            editable={isEditingInitalInfo}
+            callback={updateHealthConditions}
+          />
+        </View>
+        <TouchableOpacity
+          onPress={() => {
+            if (isEditingInitalInfo) {
+              storeData();
+            }
+            setIsEditingInitalInfo(!isEditingInitalInfo);
+          }}
+          style={styles.editButton}>
+          <Text>{isEditingInitalInfo ? 'Save' : 'Edit'}</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </View>
+    // additonal content can be added
+  );
+};
 
 const styles = StyleSheet.create({
   button: {
@@ -138,14 +240,12 @@ const styles = StyleSheet.create({
   },
   scrollable: {
     backgroundColor: '#055772',
-
   },
   basicInfo: {
     marginTop: '10%',
     width: '70%',
     display: 'flex',
     justifyContent: 'center',
-
   },
   basicInfoHeader: {
     color: '#000000',
@@ -165,7 +265,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: '10%',
   },
-  },);
-
+});
 
 export default InitialInfoScreen;

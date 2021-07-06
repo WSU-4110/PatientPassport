@@ -1145,7 +1145,7 @@
   "resolved" "https://registry.npmjs.org/@react-native-community/masked-view/-/masked-view-0.1.11.tgz"
   "version" "0.1.11"
 
-"@react-native-firebase/app@^12.1.0", "@react-native-firebase/app@12.1.0":
+"@react-native-firebase/app@^12.1.0":
   "integrity" "sha512-goulw5PFGo2NIqqZXpv7kyv0XPKWQT2G/2ZXEFMdgDnxZGRyiAH82gR/v9rAMCww1lFVTeMZdphU5WFN/qdptg=="
   "resolved" "https://registry.npmjs.org/@react-native-firebase/app/-/app-12.1.0.tgz"
   "version" "12.1.0"
@@ -1156,6 +1156,11 @@
 "@react-native-firebase/auth@^12.1.0":
   "integrity" "sha512-9/peQaPYl5M2q4q/06Sih3z+BL9wOlmXgPex7jqbF99DN6IUigEq6eOt0sR3/g0ftS/IRDG7BfbIN5MtuY1vbg=="
   "resolved" "https://registry.npmjs.org/@react-native-firebase/auth/-/auth-12.1.0.tgz"
+  "version" "12.1.0"
+
+"@react-native-firebase/firestore@^12.1.0":
+  "integrity" "sha512-SyiqRAQRS0C0Gh5gOZBp9UM0FFOF555uqJK+3NzO2GHGYM7ofLONyhnhZEJGWk9iDog/TnRjlAHC3C1zsDe+1w=="
+  "resolved" "https://registry.npmjs.org/@react-native-firebase/firestore/-/firestore-12.1.0.tgz"
   "version" "12.1.0"
 
 "@react-navigation/core@^5.15.3":
@@ -5784,7 +5789,7 @@
   "resolved" "https://registry.npmjs.org/react-native-screens/-/react-native-screens-3.3.0.tgz"
   "version" "3.3.0"
 
-"react-native@*", "react-native@^0.63.4":
+"react-native@^0.63.4":
   "integrity" "sha512-I4kM8kYO2mWEYUFITMcpRulcy4/jd+j9T6PbIzR0FuMcz/xwd+JwHoLPa1HmCesvR1RDOw9o4D+OFLwuXXfmGw=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.63.4.tgz"
   "version" "0.63.4"
@@ -5840,7 +5845,7 @@
     "react-shallow-renderer" "^16.13.1"
     "scheduler" "^0.20.1"
 
-"react@*", "react@17.0.1":
+"react@17.0.1":
   "integrity" "sha512-lG9c9UuMHdcAexXtigOZLX8exLWkW0Ku29qPRU8uhF2R9BN96dLCt0psvzPLlHc5OWkgymP3qwTRgbnw5BKx3w=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.1.tgz"
   "version" "17.0.1"

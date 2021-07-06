@@ -28,6 +28,7 @@ const ToggleableText = props => {
             value={text}
             onChangeText={text => {
               setText(text);
+              props.callback(text);
             }}
           />
         ) : (
