@@ -29,6 +29,7 @@ const RegistrationScreen = ({navigation}) => {
       .createUserWithEmailAndPassword(email, pass)
       .then(() => {
         auth().currentUser.sendEmailVerification();
+        Alert.alert('Verification Email Sent');
         navigation.navigate('Login');
       })
       .catch(error => {
