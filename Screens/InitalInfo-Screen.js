@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Text, View, ScrollView, TouchableOpacity, Image, StyleSheet,} from 'react-native';
 import ToggleableText from '../Components/ToggleableText.js';
 import SideMenuToggle from '../Components/SideMenuToggle.js';
-import collections from '@react-native-firebase/collections'
+//import collections from '@react-native-firebase/collections' // the firebase collections that is meant to 
 const InitialInfoScreen = ({navigation}) => {
 const [isEditingInitalInfo, setIsEditingInitalInfo] = useState(false);
 
@@ -61,7 +61,7 @@ const [isEditingInitalInfo, setIsEditingInitalInfo] = useState(false);
 
     // this was another way how to add a object to the collection in this case "data" which doesn't exist in our firebase collections yet
    // db.collection("data"). add({
-    })
+   // })
     <ScrollView
         style={styles.scrollable}
                 contentContainerStyle={{
