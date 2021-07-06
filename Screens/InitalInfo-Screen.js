@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Text, View, ScrollView, TouchableOpacity, Image, StyleSheet,} from 'react-native';
 import ToggleableText from '../Components/ToggleableText.js';
 import SideMenuToggle from '../Components/SideMenuToggle.js';
+//import collections from '@react-native-firebase/collections' // the firebase collections that is meant to 
 const InitialInfoScreen = ({navigation}) => {
 const [isEditingInitalInfo, setIsEditingInitalInfo] = useState(false);
 
@@ -16,6 +17,51 @@ const [isEditingInitalInfo, setIsEditingInitalInfo] = useState(false);
             <SideMenuToggle navigation={navigation} />
             <Text style={styles.headerText}>Patient Passport</Text>
     </View>
+    // this is the static version of a how firebase registers a data object
+    var docData = {
+    Fullname: "" ,
+    Gender:"" ,
+    DOB: "",
+    Alergies: "",
+    Disabilites: "",
+    Vacinations: "",
+    Heart: "",
+    Medications:"" ,
+    Smoke: "",
+    DocLocations:"" ,
+    HealthFact1: "",
+    HealthFact2: "",
+    HealthFact3: "",};
+    // the identifier for the collection to tie to accounts
+    var Linker= {
+    Marker: "insertion of account"}; // for now i understood little of auth but was getting a understanding of how to connect the account here
+    // this was how to add a data object to a specified collection
+    // my testing ability is limited so i can only speculate on some things like the data connections
+    //
+    /*
+
+    db.collection("data").doc(Linker.Marker).set(docData).then(() => {
+     // where the assign data would go
+        docData = {
+        Fullname: "" ,
+        Gender:"" ,
+        DOB: "",
+        Alergies: "",
+        Disabilites: "",
+        Vacinations: "",
+        Heart: "",
+        Medications:"" ,
+        Smoke: "",
+        DocLocations:"" ,
+        HealthFact1: "",
+        HealthFact2: "",
+        HealthFact3: "",}; //
+    console.log("Document Successfully Written!");
+    });*/
+
+    // this was another way how to add a object to the collection in this case "data" which doesn't exist in our firebase collections yet
+   // db.collection("data"). add({
+   // })
     <ScrollView
         style={styles.scrollable}
                 contentContainerStyle={{
@@ -24,6 +70,7 @@ const [isEditingInitalInfo, setIsEditingInitalInfo] = useState(false);
                   alignItems: 'center',
                 }}>
                 <View style={styles.basicInfo}>
+
                   <Text style={styles.basicInfoHeader}>Inital Information</Text>
                   <ToggleableText type="Full Name" editable={isEditingInitalInfo} />
                   <ToggleableText type="Gender" editable={isEditingInitalInfo} />
