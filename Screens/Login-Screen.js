@@ -48,7 +48,7 @@ function LoginScreen({navigation}) {
           Alert.alert('Verify your email to log in!');
           return;
         }
-        navigation.navigate('Homescreen');
+        navigation.navigate('Initial Info');
       })
       .catch(error => {
         if (
@@ -169,30 +169,28 @@ function LoginScreen({navigation}) {
 
           {/* Login text */}
           <View style={{width: '100%', backgroundColor: colors.lightGrey}}>
-        {/* Forgot Password Link */}
-        <View
-          style={{
-            marginBottom: 10,
-            marginLeft: '7.5%',
-            width: '85%',
-            flexDirection: 'row',
-            alignItems: 'flex-end',
-            justifyContent: 'center',
-          }}>
-
-          <TouchableOpacity
-            onPress={() => navigation.navigate('Forgot')}>
-            <Text
+            {/* Forgot Password Link */}
+            <View
               style={{
-                color: colors.BabyBlue,
-                fontWeight: 'bold',
-                fontSize: 14,
+                marginBottom: 10,
+                marginLeft: '7.5%',
+                width: '85%',
+                flexDirection: 'row',
+                alignItems: 'flex-end',
+                justifyContent: 'center',
               }}>
-              Forgot Password?
-            </Text>
-          </TouchableOpacity>
-        </View>
-            
+              <TouchableOpacity onPress={() => navigation.navigate('Forgot')}>
+                <Text
+                  style={{
+                    color: colors.BabyBlue,
+                    fontWeight: 'bold',
+                    fontSize: 14,
+                  }}>
+                  Forgot Password?
+                </Text>
+              </TouchableOpacity>
+            </View>
+
             {/* Sign Up Link */}
             <View
               style={{

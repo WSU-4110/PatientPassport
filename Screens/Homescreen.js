@@ -6,13 +6,82 @@ import {
   TouchableOpacity,
   Image,
   StyleSheet,
+  Alert,
 } from 'react-native';
 import ToggleableText from '../Components/ToggleableText.js';
 import SideMenuToggle from '../Components/SideMenuToggle.js';
+import {firestore} from '@react-native-firebase/firestore';
+import auth, {firebase} from '@react-native-firebase/auth';
 
 const Homescreen = ({navigation}) => {
   const [isEditingBasicInfo, setIsEditingBasicInfo] = useState(false);
   const [isEditingInsurance, setIsEditingInsurance] = useState(false);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [gender, setGender] = useState('');
+  const [DOB, setDOB] = useState('');
+  const [allergies, setAllergies] = useState('');
+  const [knownDis, setKnownDis] = useState('');
+  const [vacc, setVacc] = useState('');
+  const [meds, setMeds] = useState('');
+  const [healthConditions, setHealthConditions] = useState('');
+  const [doctors, setDoctors] = useState('');
+  const [heart, setHeart] = useState('');
+  const [smoke, setSmoke] = useState('');
+  const [values, setValues] = useState({});
+
+  const getCurrentStatus = () => {
+    var user = auth().currentUser;
+    Alert.alert(user.email);
+  };
+
+  const updateFirstName = value => {
+    setFirstName(value);
+  };
+
+  const updateLastName = value => {
+    setLastName(value);
+  };
+
+  const updateGender = value => {
+    setGender(value);
+  };
+
+  const updateDOB = value => {
+    setDOB(value);
+  };
+
+  const updateAllergies = value => {
+    setAllergies(value);
+  };
+
+  const updateKnownDis = value => {
+    setKnownDis(value);
+  };
+
+  const updateVacc = value => {
+    setVacc(value);
+  };
+
+  const updateMeds = value => {
+    setMeds(value);
+  };
+
+  const updateHealthConditions = value => {
+    setHealthConditions(value);
+  };
+
+  const updateDoctors = value => {
+    setDoctors(value);
+  };
+
+  const updateHeart = value => {
+    setHeart(value);
+  };
+
+  const updateSmoke = value => {
+    setSmoke(value);
+  };
 
   return (
     <View style={styles.container}>
@@ -33,22 +102,50 @@ const Homescreen = ({navigation}) => {
         }}>
         <View style={styles.basicInfo}>
           <Text style={styles.basicInfoHeader}>Basic Information</Text>
-          <ToggleableText type="Name" editable={isEditingBasicInfo} />
-          <ToggleableText type="Address" editable={isEditingBasicInfo} />
-          <ToggleableText type="Date of Birth" editable={isEditingBasicInfo} />
-          <ToggleableText type="Phone Number" editable={isEditingBasicInfo} />
-          <ToggleableText type="Email" editable={isEditingBasicInfo} />
+          <ToggleableText
+            type="First Name"
+            editable={isEditingBasicInfo}
+            callback={updateFirstName}
+          />
+          <ToggleableText
+            type="Last Name"
+            editable={isEditingBasicInfo}
+            callback={updateLastName}
+          />
+          <ToggleableText
+            type="Address"
+            editable={isEditingBasicInfo}
+            callback={updateFirstName}
+          />
+          <ToggleableText
+            type="Date of Birth"
+            editable={isEditingBasicInfo}
+            callback={updateDOB}
+          />
+          <ToggleableText
+            type="Phone Number"
+            editable={isEditingBasicInfo}
+            callback={updateFirstName}
+          />
+          <ToggleableText
+            type="Email"
+            editable={isEditingBasicInfo}
+            callback={updateFirstName}
+          />
           <ToggleableText
             type="Emergency Contact Name"
             editable={isEditingBasicInfo}
+            callback={updateFirstName}
           />
           <ToggleableText
             type="Emergency Contact Phone"
             editable={isEditingBasicInfo}
+            callback={updateFirstName}
           />
           <ToggleableText
             type="Emergency Contact Email"
             editable={isEditingBasicInfo}
+            callback={updateFirstName}
           />
         </View>
         <TouchableOpacity
@@ -64,29 +161,79 @@ const Homescreen = ({navigation}) => {
           <ToggleableText
             type="Name of Insured Individual"
             editable={isEditingInsurance}
+            callback={updateFirstName}
           />
-          <ToggleableText type="Date of Birth" editable={isEditingInsurance} />
-          <ToggleableText type="Employer" editable={isEditingInsurance} />
-          <ToggleableText type="Address" editable={isEditingInsurance} />
+          <ToggleableText
+            type="Date of Birth"
+            editable={isEditingInsurance}
+            callback={updateFirstName}
+          />
+          <ToggleableText
+            type="Employer"
+            editable={isEditingInsurance}
+            callback={updateFirstName}
+          />
+          <ToggleableText
+            type="Address"
+            editable={isEditingInsurance}
+            callback={updateFirstName}
+          />
           <ToggleableText
             type="Primary Insurance Company"
             editable={isEditingInsurance}
+            callback={updateFirstName}
           />
-          <ToggleableText type="Address" editable={isEditingInsurance} />
-          <ToggleableText type="Insured ID" editable={isEditingInsurance} />
-          <ToggleableText type="Contact" editable={isEditingInsurance} />
-          <ToggleableText type="Notes" editable={isEditingInsurance} />
+          <ToggleableText
+            type="Address"
+            editable={isEditingInsurance}
+            callback={updateFirstName}
+          />
+          <ToggleableText
+            type="Insured ID"
+            editable={isEditingInsurance}
+            callback={updateFirstName}
+          />
+          <ToggleableText
+            type="Contact"
+            editable={isEditingInsurance}
+            callback={updateFirstName}
+          />
+          <ToggleableText
+            type="Notes"
+            editable={isEditingInsurance}
+            callback={updateFirstName}
+          />
           <ToggleableText
             type="Secondary Insurance"
             editable={isEditingInsurance}
+            callback={updateFirstName}
           />
-          <ToggleableText type="Address" editable={isEditingInsurance} />
-          <ToggleableText type="Insured ID" editable={isEditingInsurance} />
-          <ToggleableText type="Contact" editable={isEditingInsurance} />
-          <ToggleableText type="Notes" editable={isEditingInsurance} />
+          <ToggleableText
+            type="Address"
+            editable={isEditingInsurance}
+            callback={updateFirstName}
+          />
+          <ToggleableText
+            type="Insured ID"
+            editable={isEditingInsurance}
+            callback={updateFirstName}
+          />
+          <ToggleableText
+            type="Contact"
+            editable={isEditingInsurance}
+            callback={updateFirstName}
+          />
+          <ToggleableText
+            type="Notes"
+            editable={isEditingInsurance}
+            callback={updateFirstName}
+          />
         </View>
         <TouchableOpacity
-          onPress={() => setIsEditingInsurance(!isEditingInsurance)}
+          onPress={() => {
+            setIsEditingInsurance(!isEditingInsurance);
+            getCurrentStatus();
+          }}
           style={styles.editButton}>
           <Text>{isEditingInsurance ? 'Save' : 'Edit'}</Text>
         </TouchableOpacity>

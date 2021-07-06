@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import ToggleableText from '../Components/ToggleableText.js';
 import SideMenuToggle from '../Components/SideMenuToggle.js';
-import {firebase} from '@react-native-firebase/auth';
+import auth, {firebase} from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 const InitialInfoScreen = ({navigation}) => {
   const [isEditingInitalInfo, setIsEditingInitalInfo] = useState(false);
@@ -28,9 +28,12 @@ const InitialInfoScreen = ({navigation}) => {
   const [smoke, setSmoke] = useState('');
 
   const storeData = () => {
+    var email = auth().currentUser.email;
+
     firestore()
       .collection('users')
-      .add({
+      .doc(email)
+      .set({
         firstName: firstName,
         lastName: lastName,
         gender: gender,
