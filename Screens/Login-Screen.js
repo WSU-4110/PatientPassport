@@ -44,6 +44,10 @@ function LoginScreen({navigation}) {
     auth()
       .signInWithEmailAndPassword(email, pass)
       .then(() => {
+        if (!auth().currentUser.emailVerified) {
+          Alert.alert('Verify your email to log in!');
+          return;
+        }
         navigation.navigate('Homescreen');
       })
       .catch(error => {

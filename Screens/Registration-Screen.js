@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import auth from '@react-native-firebase/auth';
+import auth, {firebase} from '@react-native-firebase/auth';
 
 let {height, width} = Dimensions.get('screen');
 
@@ -28,7 +28,8 @@ const RegistrationScreen = ({navigation}) => {
     auth()
       .createUserWithEmailAndPassword(email, pass)
       .then(() => {
-        navigation.navigate('Initial Info');
+        auth().currentUser.sendEmailVerification();
+        navigation.navigate('Login');
       })
       .catch(error => {
         if (error.code === 'auth/email-already-in-use')
