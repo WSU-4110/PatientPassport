@@ -1,9 +1,12 @@
-import React, {useState} from 'react';
-import {TextInput, Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {TextInput, Text, View, Alert} from 'react-native';
 
 const ToggleableText = props => {
   const [text, setText] = useState('');
 
+  useEffect(() => {
+    setText(props.initText);
+  }, [props.editable]);
   return (
     <View>
       <View
@@ -32,7 +35,9 @@ const ToggleableText = props => {
             }}
           />
         ) : (
-          <Text style={{color: 'white', marginBottom: 10}}>{text}</Text>
+          <Text style={{color: 'white', marginBottom: 10}}>
+            {props.initText}
+          </Text>
         )}
       </View>
     </View>

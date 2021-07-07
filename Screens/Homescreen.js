@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   View,
@@ -10,79 +10,185 @@ import {
 } from 'react-native';
 import ToggleableText from '../Components/ToggleableText.js';
 import SideMenuToggle from '../Components/SideMenuToggle.js';
-import {firestore} from '@react-native-firebase/firestore';
+import firestore from '@react-native-firebase/firestore';
 import auth, {firebase} from '@react-native-firebase/auth';
 
 const Homescreen = ({navigation}) => {
   const [isEditingBasicInfo, setIsEditingBasicInfo] = useState(false);
   const [isEditingInsurance, setIsEditingInsurance] = useState(false);
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [gender, setGender] = useState('');
-  const [DOB, setDOB] = useState('');
-  const [allergies, setAllergies] = useState('');
-  const [knownDis, setKnownDis] = useState('');
-  const [vacc, setVacc] = useState('');
-  const [meds, setMeds] = useState('');
-  const [healthConditions, setHealthConditions] = useState('');
-  const [doctors, setDoctors] = useState('');
-  const [heart, setHeart] = useState('');
-  const [smoke, setSmoke] = useState('');
   const [values, setValues] = useState({});
+  const userID = auth().currentUser.email;
 
-  const getCurrentStatus = () => {
-    var user = auth().currentUser;
-    Alert.alert(user.email);
+  const setCurrentStatus = () => {
+    firestore().collection('users').doc(userID).update(values);
   };
 
   const updateFirstName = value => {
-    setFirstName(value);
+    setValues({
+      ...values,
+      firstName: value,
+    });
   };
 
   const updateLastName = value => {
-    setLastName(value);
+    setValues({
+      ...values,
+      lastName: value,
+    });
   };
 
   const updateGender = value => {
-    setGender(value);
+    setValues({
+      ...values,
+      gender: value,
+    });
   };
 
   const updateDOB = value => {
-    setDOB(value);
+    setValues({
+      ...values,
+      DOB: value,
+    });
   };
 
   const updateAllergies = value => {
-    setAllergies(value);
+    setValues({
+      ...values,
+      allergies: value,
+    });
   };
 
   const updateKnownDis = value => {
-    setKnownDis(value);
+    setValues({...values, knownDis: value});
   };
 
   const updateVacc = value => {
-    setVacc(value);
+    setValues({...values, vacc: value});
   };
 
   const updateMeds = value => {
-    setMeds(value);
+    setValues({...values, meds: value});
   };
 
   const updateHealthConditions = value => {
-    setHealthConditions(value);
+    setValues({...values, healthConditions: value});
   };
 
   const updateDoctors = value => {
-    setDoctors(value);
+    setValues({...values, doctors: value});
   };
 
   const updateHeart = value => {
-    setHeart(value);
+    setValues({...values, heart: value});
   };
 
   const updateSmoke = value => {
-    setSmoke(value);
+    setValues({...values, smoke: value});
   };
 
+  const updateAddress = value => {
+    setValues({
+      ...values,
+      address: value,
+    });
+  };
+
+  const updatePhoneNumber = value => {
+    let newPhone = {...values, phoneNumber: value};
+    setValues(newPhone);
+  };
+
+  const updateEmergContactName = value => {
+    setValues({
+      ...values,
+      emergContactName: value,
+    });
+  };
+
+  const updateEmergContactPhone = value => {
+    setValues({
+      ...values,
+      emergContactPhone: value,
+    });
+  };
+
+  const updateEmergContactEmail = value => {
+    setValues({
+      ...values,
+      emergContactEmail: value,
+    });
+  };
+
+  const updateInsuredName = value => {
+    setValues({
+      ...values,
+      insuredName: value,
+    });
+  };
+
+  const updateInsuredDOB = value => {
+    setValues({
+      ...values,
+      insuredDOB: value,
+    });
+  };
+  const updateInsuredEmployer = value => {
+    setValues({
+      ...values,
+      insuredEmployer: value,
+    });
+  };
+
+  const updateInsuredAddress = value => {
+    setValues({
+      ...values,
+      insuredAddress: value,
+    });
+  };
+
+  const updatePrimaryInsurance = value => {
+    setValues({
+      ...values,
+      primaryInsurance: value,
+    });
+  };
+
+  const updateInsuranceAddress = value => {
+    setValues({
+      ...values,
+      insuranceAdress: value,
+    });
+  };
+
+  const updateInsuredID = value => {
+    setValues({
+      ...values,
+      insuredID: value,
+    });
+  };
+
+  const updateInsuranceContact = value => {
+    setValues({
+      ...values,
+      insuranceContact: value,
+    });
+  };
+
+  const updateInsuranceNotes = value => {
+    setValues({
+      ...values,
+      insuranceNotes: value,
+    });
+  };
+
+  useEffect(() => {
+    firestore()
+      .collection('users')
+      .doc(userID)
+      .onSnapshot(documentSnapshot => {
+        setValues(documentSnapshot.data());
+      });
+  }, []);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -106,50 +212,68 @@ const Homescreen = ({navigation}) => {
             type="First Name"
             editable={isEditingBasicInfo}
             callback={updateFirstName}
+            initText={values.firstName}
           />
           <ToggleableText
             type="Last Name"
             editable={isEditingBasicInfo}
             callback={updateLastName}
+            initText={values.lastName}
+          />
+          <ToggleableText
+            type="Gender"
+            editable={isEditingBasicInfo}
+            callback={updateGender}
+            initText={values.gender}
           />
           <ToggleableText
             type="Address"
             editable={isEditingBasicInfo}
-            callback={updateFirstName}
+            callback={updateAddress}
+            initText={values.address}
           />
           <ToggleableText
             type="Date of Birth"
             editable={isEditingBasicInfo}
             callback={updateDOB}
+            initText={values.DOB}
           />
           <ToggleableText
             type="Phone Number"
             editable={isEditingBasicInfo}
-            callback={updateFirstName}
+            callback={updatePhoneNumber}
+            initText={values.phoneNumber}
           />
           <ToggleableText
             type="Email"
             editable={isEditingBasicInfo}
-            callback={updateFirstName}
+            callback={null}
+            initText={userID}
           />
           <ToggleableText
             type="Emergency Contact Name"
             editable={isEditingBasicInfo}
-            callback={updateFirstName}
+            callback={updateEmergContactName}
+            initText={values.emergContactName}
           />
           <ToggleableText
             type="Emergency Contact Phone"
             editable={isEditingBasicInfo}
-            callback={updateFirstName}
+            callback={updateEmergContactPhone}
+            initText={values.emergContactPhone}
           />
           <ToggleableText
             type="Emergency Contact Email"
             editable={isEditingBasicInfo}
-            callback={updateFirstName}
+            callback={updateEmergContactEmail}
+            initText={values.emergContactEmail}
           />
         </View>
         <TouchableOpacity
           onPress={() => {
+            if (isEditingBasicInfo) {
+              setCurrentStatus();
+            }
             setIsEditingBasicInfo(!isEditingBasicInfo);
           }}
           style={styles.editButton}>
@@ -161,78 +285,62 @@ const Homescreen = ({navigation}) => {
           <ToggleableText
             type="Name of Insured Individual"
             editable={isEditingInsurance}
-            callback={updateFirstName}
+            callback={updateInsuredName}
+            initText={values.insuredName}
           />
           <ToggleableText
             type="Date of Birth"
             editable={isEditingInsurance}
-            callback={updateFirstName}
+            callback={updateInsuredDOB}
+            initText={values.insuredDOB}
           />
           <ToggleableText
             type="Employer"
             editable={isEditingInsurance}
-            callback={updateFirstName}
+            callback={updateInsuredEmployer}
+            initText={values.insuredEmployer}
           />
           <ToggleableText
             type="Address"
             editable={isEditingInsurance}
-            callback={updateFirstName}
+            callback={updateInsuredAddress}
+            initText={values.insuredAddress}
           />
           <ToggleableText
             type="Primary Insurance Company"
             editable={isEditingInsurance}
-            callback={updateFirstName}
+            callback={updatePrimaryInsurance}
+            initText={values.primaryInsurance}
           />
           <ToggleableText
             type="Address"
             editable={isEditingInsurance}
-            callback={updateFirstName}
+            callback={updateInsuranceAddress}
+            initText={values.insuranceAdress}
           />
           <ToggleableText
             type="Insured ID"
             editable={isEditingInsurance}
-            callback={updateFirstName}
+            callback={updateInsuredID}
+            initText={values.insuredID}
           />
           <ToggleableText
             type="Contact"
             editable={isEditingInsurance}
-            callback={updateFirstName}
+            callback={updateInsuranceContact}
+            initText={values.insuranceContact}
           />
           <ToggleableText
             type="Notes"
             editable={isEditingInsurance}
-            callback={updateFirstName}
-          />
-          <ToggleableText
-            type="Secondary Insurance"
-            editable={isEditingInsurance}
-            callback={updateFirstName}
-          />
-          <ToggleableText
-            type="Address"
-            editable={isEditingInsurance}
-            callback={updateFirstName}
-          />
-          <ToggleableText
-            type="Insured ID"
-            editable={isEditingInsurance}
-            callback={updateFirstName}
-          />
-          <ToggleableText
-            type="Contact"
-            editable={isEditingInsurance}
-            callback={updateFirstName}
-          />
-          <ToggleableText
-            type="Notes"
-            editable={isEditingInsurance}
-            callback={updateFirstName}
+            callback={updateInsuranceNotes}
+            initText={values.insuranceNotes}
           />
         </View>
         <TouchableOpacity
           onPress={() => {
+            if (isEditingInsurance) setCurrentStatus();
             setIsEditingInsurance(!isEditingInsurance);
-            getCurrentStatus();
           }}
           style={styles.editButton}>
           <Text>{isEditingInsurance ? 'Save' : 'Edit'}</Text>

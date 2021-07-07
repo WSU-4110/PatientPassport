@@ -124,71 +124,85 @@ const InitialInfoScreen = ({navigation}) => {
             type="First Name"
             editable={isEditingInitalInfo}
             callback={updateFirstName}
+            initText=""
           />
           <ToggleableText
             type="Last Name"
             editable={isEditingInitalInfo}
             callback={updateLastName}
+            initText=""
           />
           <ToggleableText
             type="Gender"
             editable={isEditingInitalInfo}
             callback={updateGender}
+            initText=""
           />
           <ToggleableText
             type="Date of Birth"
             editable={isEditingInitalInfo}
             callback={updateDOB}
+            initText=""
           />
           <ToggleableText
             type="Alergies"
             editable={isEditingInitalInfo}
             callback={updateAllergies}
+            initText=""
           />
           <ToggleableText
             type="Known Disabilites"
             editable={isEditingInitalInfo}
             callback={updateKnownDis}
+            initText=""
           />
           <ToggleableText
             type="Known Vaccinations"
             editable={isEditingInitalInfo}
             callback={updateVacc}
+            initText=""
           />
           <ToggleableText
             type="Heart conditions"
             editable={isEditingInitalInfo}
             callback={updateHeart}
+            initText=""
           />
           <ToggleableText
             type="currently taken medications"
             editable={isEditingInitalInfo}
             callback={updateMeds}
+            initText=""
           />
           <ToggleableText
             type="Do You Smoke?"
             editable={isEditingInitalInfo}
             callback={updateSmoke}
+            initText=""
           />
           <ToggleableText
             type="Known Doctors and locations"
             editable={isEditingInitalInfo}
             callback={updateDoctors}
+            initText=""
           />
           <ToggleableText
             type="Any Additional Health Concerns #1"
             editable={isEditingInitalInfo}
             callback={updateHealthConditions}
+            initText=""
           />
           <ToggleableText
             type="Any Additional Health Concerns #2"
             editable={isEditingInitalInfo}
             callback={updateHealthConditions}
+            initText=""
           />
           <ToggleableText
             type="Any Additional Health Concerns #3"
             editable={isEditingInitalInfo}
             callback={updateHealthConditions}
+            initText=""
           />
         </View>
         <TouchableOpacity
