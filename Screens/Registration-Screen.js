@@ -10,7 +10,8 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import auth, {firebase} from '@react-native-firebase/auth';
+
+import SingleUser from '../Components/user';
 
 let {height, width} = Dimensions.get('screen');
 
@@ -25,10 +26,11 @@ const RegistrationScreen = ({navigation}) => {
   // !-----------------------------
   const handleSuccessfulRegistration = (email, pass) => {
     //Pushed registration information to the database
+    user = SingleUser.getSingleUser();
     auth()
       .createUserWithEmailAndPassword(email, pass)
       .then(() => {
-        auth().currentUser.sendEmailVerification();
+        user.sendEmailVerification();
         Alert.alert('Email verification sent!');
         navigation.navigate('Login');
       })

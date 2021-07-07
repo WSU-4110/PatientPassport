@@ -16,6 +16,7 @@ import AppTextButton from './components/AppTextButton';
 
 import colors from './config/Colors';
 import logo from './assets/img/PatientPassportLogo.png';
+import SingleUser from '../Components/user';
 
 import auth from '@react-native-firebase/auth';
 
@@ -41,10 +42,11 @@ function LoginScreen({navigation}) {
   // !-----------------------------
   const validateUser = (email, pass) => {
     //Authenticates user from database
+    user = SingleUser.getSingleUser();
     auth()
       .signInWithEmailAndPassword(email, pass)
       .then(() => {
-        if (!auth().currentUser.emailVerified) {
+        if (!user.isVerified()) {
           Alert.alert('Verify your email to log in!');
           return;
         }
