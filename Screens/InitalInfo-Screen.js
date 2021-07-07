@@ -99,7 +99,54 @@ const InitialInfoScreen = ({navigation}) => {
   const updateSmoke = value => {
     setSmoke(value);
   };
-
+function FirstNameButton(){
+var FName = window.prompt ("update First name: ");
+updateFirstName = FName;
+}
+function LastNameButton(){
+var LName = window.prompt ("update Last name: ");
+updateLastName = LName;
+}
+function GenderButton(){
+var Gen = window.prompt ("update Gender: ");
+updateGender = Gen;
+}
+function DOBButton(){
+var DateB = window.prompt ("Date of Birth: ");
+updateDOB = DateB;
+}
+function AllergyButton(){
+var Allergy = window.prompt ("update Allergins: ");
+updateAllergies = Allergy;
+}
+function DisButton(){
+var Dis = window.prompt ("update Disabilites: ");
+updateKnownDis= Dis;
+}
+function VacButton(){
+var Vac = window.prompt ("update Vacinations: ");
+updateVacc = Vac;
+}
+function MedButton(){
+var Med = window.prompt ("update medications: ");
+updateMeds = Med;
+}
+function HCButton(){
+var HC = window.prompt ("update Health Conditions: ");
+updateHealthConditions = HC;
+}
+function DocButton(){
+var Doc = window.prompt ("update Doctor(s): ");
+updateDoctors = Doc;
+}
+function HeartButton(){
+var Hea = window.prompt ("update Heart problems: ");
+updateHeart = Hea;
+}
+function SmokeButton(){
+var Smo = window.prompt ("update Smoking condition: ");
+updateSmoke = Smo;
+}
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -120,76 +167,18 @@ const InitialInfoScreen = ({navigation}) => {
         }}>
         <View style={styles.basicInfo}>
           <Text style={styles.basicInfoHeader}>Inital Information</Text>
-          <ToggleableText
-            type="First Name"
-            editable={isEditingInitalInfo}
-            callback={updateFirstName}
-          />
-          <ToggleableText
-            type="Last Name"
-            editable={isEditingInitalInfo}
-            callback={updateLastName}
-          />
-          <ToggleableText
-            type="Gender"
-            editable={isEditingInitalInfo}
-            callback={updateGender}
-          />
-          <ToggleableText
-            type="Date of Birth"
-            editable={isEditingInitalInfo}
-            callback={updateDOB}
-          />
-          <ToggleableText
-            type="Alergies"
-            editable={isEditingInitalInfo}
-            callback={updateAllergies}
-          />
-          <ToggleableText
-            type="Known Disabilites"
-            editable={isEditingInitalInfo}
-            callback={updateKnownDis}
-          />
-          <ToggleableText
-            type="Known Vaccinations"
-            editable={isEditingInitalInfo}
-            callback={updateVacc}
-          />
-          <ToggleableText
-            type="Heart conditions"
-            editable={isEditingInitalInfo}
-            callback={updateHeart}
-          />
-          <ToggleableText
-            type="currently taken medications"
-            editable={isEditingInitalInfo}
-            callback={updateMeds}
-          />
-          <ToggleableText
-            type="Do You Smoke?"
-            editable={isEditingInitalInfo}
-            callback={updateSmoke}
-          />
-          <ToggleableText
-            type="Known Doctors and locations"
-            editable={isEditingInitalInfo}
-            callback={updateDoctors}
-          />
-          <ToggleableText
-            type="Any Additional Health Concerns #1"
-            editable={isEditingInitalInfo}
-            callback={updateHealthConditions}
-          />
-          <ToggleableText
-            type="Any Additional Health Concerns #2"
-            editable={isEditingInitalInfo}
-            callback={updateHealthConditions}
-          />
-          <ToggleableText
-            type="Any Additional Health Concerns #3"
-            editable={isEditingInitalInfo}
-            callback={updateHealthConditions}
-          />
+           <button onclick="FirstNameButton()">Click me</button>
+           <button onclick="LastNameButton()">Click me</button>
+          <button onclick="GenderButton()">Click me</button>
+           <button onclick="DOBButton()">Click me</button>
+           <button onclick="AllergyButton()">Click me</button>
+           <button onclick="DisButton()">Click me</button>
+           <button onclick="VacButton()">Click me</button>
+           <button onclick="MedButton()">Click me</button>
+           <button onclick="HCButton()">Click me</button>
+           <button onclick="DocButton()">Click me</button>
+           <button onclick="HeartButton()">Click me</button>
+           <button onclick="SmokeButton()">Click me</button>
         </View>
         <TouchableOpacity
           onPress={() => {
