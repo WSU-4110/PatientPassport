@@ -16,11 +16,37 @@ import auth, {firebase} from '@react-native-firebase/auth';
 const Homescreen = ({navigation}) => {
   const [isEditingBasicInfo, setIsEditingBasicInfo] = useState(false);
   const [isEditingInsurance, setIsEditingInsurance] = useState(false);
-  const [values, setValues] = useState({});
+  const [values, setValues] = useState({
+    firstName: '',
+    lastName: '',
+    gender: '',
+    address: '',
+    DOB: '',
+    phoneNumber: '',
+    email: '',
+    emergContactName: '',
+    emergContactPhone: '',
+    emergContactEmail: '',
+    insuredName: '',
+    insuredEmployer: '',
+    insuredAddress: '',
+    primaryInsurance: '',
+    insuredID: '',
+    insuranceContact: '',
+    insuranceNotes: '',
+  });
   const userID = auth().currentUser.email;
 
   const setCurrentStatus = () => {
-    firestore().collection('users').doc(userID).update(values);
+    firestore()
+      .collection('users')
+      .doc(userID)
+      .update(values)
+      .catch(error => {
+        if (error.code === 'firestore/not-found') {
+          firestore().collection('users').doc(userID).set(values);
+        }
+      });
   };
 
   const updateFirstName = value => {
@@ -212,37 +238,37 @@ const Homescreen = ({navigation}) => {
             type="First Name"
             editable={isEditingBasicInfo}
             callback={updateFirstName}
-            initText={values.firstName}
+            initText={typeof values !== 'undefined' ? values.firstName : ''}
           />
           <ToggleableText
             type="Last Name"
             editable={isEditingBasicInfo}
             callback={updateLastName}
-            initText={values.lastName}
+            initText={typeof values !== 'undefined' ? values.lastName : ''}
           />
           <ToggleableText
             type="Gender"
             editable={isEditingBasicInfo}
             callback={updateGender}
-            initText={values.gender}
+            initText={typeof values !== 'undefined' ? values.gender : ''}
           />
           <ToggleableText
             type="Address"
             editable={isEditingBasicInfo}
             callback={updateAddress}
-            initText={values.address}
+            initText={typeof values !== 'undefined' ? values.address : ''}
           />
           <ToggleableText
             type="Date of Birth"
             editable={isEditingBasicInfo}
             callback={updateDOB}
-            initText={values.DOB}
+            initText={typeof values !== 'undefined' ? values.DOB : ''}
           />
           <ToggleableText
             type="Phone Number"
             editable={isEditingBasicInfo}
             callback={updatePhoneNumber}
-            initText={values.phoneNumber}
+            initText={typeof values !== 'undefined' ? values.phoneNumber : ''}
           />
           <ToggleableText
             type="Email"
@@ -254,19 +280,25 @@ const Homescreen = ({navigation}) => {
             type="Emergency Contact Name"
             editable={isEditingBasicInfo}
             callback={updateEmergContactName}
-            initText={values.emergContactName}
+            initText={
+              typeof values !== 'undefined' ? values.emergContactName : ''
+            }
           />
           <ToggleableText
             type="Emergency Contact Phone"
             editable={isEditingBasicInfo}
             callback={updateEmergContactPhone}
-            initText={values.emergContactPhone}
+            initText={
+              typeof values !== 'undefined' ? values.emergContactPhone : ''
+            }
           />
           <ToggleableText
             type="Emergency Contact Email"
             editable={isEditingBasicInfo}
             callback={updateEmergContactEmail}
-            initText={values.emergContactEmail}
+            initText={
+              typeof values !== 'undefined' ? values.emergContactEmail : ''
+            }
           />
         </View>
         <TouchableOpacity
@@ -286,55 +318,67 @@ const Homescreen = ({navigation}) => {
             type="Name of Insured Individual"
             editable={isEditingInsurance}
             callback={updateInsuredName}
-            initText={values.insuredName}
+            initText={typeof values !== 'undefined' ? values.insuredName : ''}
           />
           <ToggleableText
             type="Date of Birth"
             editable={isEditingInsurance}
             callback={updateInsuredDOB}
-            initText={values.insuredDOB}
+            initText={typeof values !== 'undefined' ? values.insuredDOB : ''}
           />
           <ToggleableText
             type="Employer"
             editable={isEditingInsurance}
             callback={updateInsuredEmployer}
-            initText={values.insuredEmployer}
+            initText={
+              typeof values !== 'undefined' ? values.insuredEmployer : ''
+            }
           />
           <ToggleableText
             type="Address"
             editable={isEditingInsurance}
             callback={updateInsuredAddress}
-            initText={values.insuredAddress}
+            initText={
+              typeof values !== 'undefined' ? values.insuredAddress : ''
+            }
           />
           <ToggleableText
             type="Primary Insurance Company"
             editable={isEditingInsurance}
             callback={updatePrimaryInsurance}
-            initText={values.primaryInsurance}
+            initText={
+              typeof values !== 'undefined' ? values.primaryInsurance : ''
+            }
           />
           <ToggleableText
             type="Address"
             editable={isEditingInsurance}
             callback={updateInsuranceAddress}
-            initText={values.insuranceAdress}
+            initText={
+              typeof values !== 'undefined' ? values.insuranceAdress : ''
+            }
           />
           <ToggleableText
             type="Insured ID"
             editable={isEditingInsurance}
             callback={updateInsuredID}
-            initText={values.insuredID}
+            initText={typeof values !== 'undefined' ? values.insuredID : ''}
           />
           <ToggleableText
             type="Contact"
             editable={isEditingInsurance}
             callback={updateInsuranceContact}
-            initText={values.insuranceContact}
+            initText={
+              typeof values !== 'undefined' ? values.insuranceContact : ''
+            }
           />
           <ToggleableText
             type="Notes"
             editable={isEditingInsurance}
             callback={updateInsuranceNotes}
-            initText={values.insuranceNotes}
+            initText={
+              typeof values !== 'undefined' ? values.insuranceNotes : ''
+            }
           />
         </View>
         <TouchableOpacity
