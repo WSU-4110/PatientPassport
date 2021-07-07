@@ -48,7 +48,7 @@ const InitialInfoScreen = ({navigation}) => {
         smoke: smoke,
       })
       .then(() => {
-        Alert.alert('User added');
+        Alert.alert('User Added');
       });
   };
 
@@ -156,12 +156,12 @@ const InitialInfoScreen = ({navigation}) => {
             callback={updateVacc}
           />
           <ToggleableText
-            type="Heart conditions"
+            type="Heart Conditions"
             editable={isEditingInitalInfo}
             callback={updateHeart}
           />
           <ToggleableText
-            type="currently taken medications"
+            type="Current Medications"
             editable={isEditingInitalInfo}
             callback={updateMeds}
           />
@@ -171,7 +171,7 @@ const InitialInfoScreen = ({navigation}) => {
             callback={updateSmoke}
           />
           <ToggleableText
-            type="Known Doctors and locations"
+            type="Known Doctors and Locations"
             editable={isEditingInitalInfo}
             callback={updateDoctors}
           />

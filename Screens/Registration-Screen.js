@@ -11,6 +11,7 @@ import {
   Alert,
 } from 'react-native';
 import auth, {firebase} from '@react-native-firebase/auth';
+import logo from './assets/img/PatientPassportLogo.png';
 
 let {height, width} = Dimensions.get('screen');
 
@@ -34,8 +35,8 @@ const RegistrationScreen = ({navigation}) => {
       })
       .catch(error => {
         if (error.code === 'auth/email-already-in-use')
-          Alert.alert('Email already in use');
-        if (error.code === 'auth/invalid-email') Alert.alert('Invalid email');
+          Alert.alert('Email Already in Use');
+        if (error.code === 'auth/invalid-email') Alert.alert('Invalid Email');
       });
   };
 
@@ -43,8 +44,8 @@ const RegistrationScreen = ({navigation}) => {
     if (name && email && pass && cpass && pass === cpass) {
       handleSuccessfulRegistration(email, pass);
     } else if (pass != cpass)
-      Alert.alert('Error', 'Passwords do not match', [{text: 'OK'}]);
-    else Alert.alert('Error', 'All fields are required.', [{text: 'OK'}]);
+      Alert.alert('Error', 'Passwords do Not Match', [{text: 'OK'}]);
+    else Alert.alert('Error', 'All Fields are Required.', [{text: 'OK'}]);
   };
 
   return (
@@ -56,8 +57,9 @@ const RegistrationScreen = ({navigation}) => {
           alignItems: 'center',
         }}>
         <Image
-          source={require('../AppDesignDocs/PatientPassport_Logo.png')}
-          style={{height: height * 0.18, width: width * 0.5}}
+          sresizeMethod="auto"
+          style={{marginBottom: 40, width: 166, height: 130}}
+          source={logo}
         />
       </View>
 

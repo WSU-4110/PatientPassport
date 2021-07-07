@@ -45,7 +45,7 @@ function LoginScreen({navigation}) {
       .signInWithEmailAndPassword(email, pass)
       .then(() => {
         if (!auth().currentUser.emailVerified) {
-          Alert.alert('Verify your email to log in!');
+          Alert.alert('Verify Email to Log In');
           return;
         }
         navigation.navigate('Initial Info');
@@ -55,10 +55,10 @@ function LoginScreen({navigation}) {
           error.code === 'auth/invalid-email' ||
           error.code === 'auth/wrong-password'
         )
-          Alert.alert('Invalid credentials.');
-        if (error.code === 'auth/user-not-found') Alert.alert('User not found');
+          Alert.alert('Invalid Credentials.');
+        if (error.code === 'auth/user-not-found') Alert.alert('User Not Found');
         if (error.code === 'auth/user-disabled')
-          Alert.alert('Account disabled');
+          Alert.alert('Account Disabled');
       });
   };
 
