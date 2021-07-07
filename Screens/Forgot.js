@@ -20,7 +20,7 @@ import logo from './assets/img/PatientPassportLogo.png';
 let {height, width} = Dimensions.get('screen');
 
 const ForgotPassword = () => {
-
+//setting default values to variables
 const [email, setEmail] = useState('');
 const [showLoading, setShowLoading] = useState(false);
 
@@ -40,6 +40,7 @@ const reset = async() => {
 };
 
   return (
+  //designing the UI
     <ScrollView style={{flex: 1, backgroundColor: '#001F3D'}}>
      <View
        style={{
@@ -77,6 +78,7 @@ const reset = async() => {
        }}>
     <TextInput
        style={styles.input}
+       //setting value to email that user will enter using setEmail
        value={email}
        onChangeText={val => setEmail(val)}
        placeholder="Enter Email Here"
@@ -92,6 +94,8 @@ const reset = async() => {
        alignItems: 'center',
      }}>
 
+
+     { /*calling reset function when user clicks send email button*/}
      <TouchableOpacity onPress={reset} style={styles.button}>
        <Text style={{color: '#fff', fontSize: 18, fontWeight: 'bold'}}>
          Send Email
