@@ -1,0 +1,73 @@
+import React from 'react'
+import { View, Text} from 'react-native'
+
+class fakeRegister extends React.Component{
+const RegistrationScreen = ({navigation}) => {
+  let [name, setName] = useState('');
+  let [email, setEmail] = useState('');
+  let [pass, setPass] = useState('');
+  let [cpass, setCpass] = useState('');
+
+render() {
+return (
+<View
+          style={{
+            ...styles.inputContainer,
+            marginTop: 40,
+          }}>
+          <TextInput
+            style={styles.input}
+            value={name}
+            onChangeText={val => setName(val)}
+            placeholder="Name"
+            placeholderTextColor="#fff"
+          />
+        </View>
+        <View
+          style={{
+            ...styles.inputContainer,
+            marginTop: 20,
+          }}>
+          <TextInput
+            style={styles.input}
+            value={email}
+            onChangeText={val => setEmail(val)}
+            placeholder="Email"
+            placeholderTextColor="#fff"
+            keyboardType="email-address"
+          />
+        </View>
+        <View
+          style={{
+            ...styles.inputContainer,
+            marginTop: 20,
+          }}>
+          <TextInput
+            style={styles.input}
+            value={pass}
+            onChangeText={val => setPass(val)}
+            placeholder="Password"
+            placeholderTextColor="#fff"
+            secureTextEntry={true}
+          />
+        </View>
+        <View
+          style={{
+            ...styles.inputContainer,
+            marginTop: 20,
+          }}>
+          <TextInput
+            style={styles.input}
+            value={cpass}
+            onChangeText={val => setCpass(val)}
+            placeholder="Confirm Password"
+            placeholderTextColor="#fff"
+            secureTextEntry={true}
+          />
+        </View>
+)
+}
+
+}
+
+export default fakeRegister;
