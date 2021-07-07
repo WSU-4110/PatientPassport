@@ -83,6 +83,65 @@ const Homescreen = ({navigation}) => {
     setSmoke(value);
   };
 
+function FirstNameButton(){
+var FName = window.prompt ("update First name: ");
+updateFirstName = FName;
+}
+
+function LastNameButton(){
+var LName = window.prompt ("update Last name: ");
+updateLastName = LName;
+}
+
+function GenderButton(){
+var gen = window.prompt ("Update Gender: ");
+updateGender = gen;
+}
+
+function DOBButton(){
+var DOB = window.prompt ("Update Date of Birth: ");
+updateDOB = DOB;
+}
+
+function AllergyButton(){
+var ALLER = window.prompt ("Update Allergies: ");
+updateAllergies = ALLER;
+}
+
+function DisButton(){
+var dis = window.prompt ("Update Known Disabilities: ");
+updateKownDis = dis;
+}
+
+function VaccineButton(){
+var Vaccine = window.prompt ("Update Vaccinations: ");
+updateVacc = Vaccine;
+}
+
+function MedButton(){
+var med = window.prompt ("Update Medication: ");
+updateMeds = med;
+}
+
+function HealthConButton(){
+var con = window.prompt ("Update Health Conditions: ");
+updateHealthConditions = con;
+}
+
+function DoctorButton(){
+var doc = window.prompt ("Update Doctor: ");
+updateDoctors = doc;
+}
+
+function HeartButton(){
+var hrt = window.prompt ("Update Heart Health: ");
+updateHeart = hrt;
+}
+
+function SmokeButton(){
+var smk = window.prompt ("Do You Smoke Y/N: ");
+updateSmoke = smk;
+}
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -102,25 +161,11 @@ const Homescreen = ({navigation}) => {
         }}>
         <View style={styles.basicInfo}>
           <Text style={styles.basicInfoHeader}>Basic Information</Text>
-          <ToggleableText
-            type="First Name"
-            editable={isEditingBasicInfo}
-            callback={updateFirstName}
-          />
-          <ToggleableText
-            type="Last Name"
-            editable={isEditingBasicInfo}
-            callback={updateLastName}
-          />
+        
           <ToggleableText
             type="Address"
             editable={isEditingBasicInfo}
             callback={updateFirstName}
-          />
-          <ToggleableText
-            type="Date of Birth"
-            editable={isEditingBasicInfo}
-            callback={updateDOB}
           />
           <ToggleableText
             type="Phone Number"
@@ -147,6 +192,20 @@ const Homescreen = ({navigation}) => {
             editable={isEditingBasicInfo}
             callback={updateFirstName}
           />
+
+	   <button onclick="FirstNameButton()">Click me</button>
+           <button onclick="LastNameButton()">Click me</button>
+           <button onclick="GenderButton()">Click me</button>
+           <button onclick="GenderButton()">Click me</button>
+           <button onclick="DOBButton()">Click me</button>
+           <button onclick="AllergyButton()">Click me</button>
+           <button onclick="DisButton()">Click me</button>
+           <button onclick="VaccineButton()">Click me</button>
+           <button onclick="MedButton()">Click me</button>
+           <button onclick="HealthConButton()">Click me</button>
+           <button onclick="DoctorButton()">Click me</button>
+           <button onclick="HeartButton()">Click me</button>
+           <button onclick="SmokeButton()">Click me</button>
         </View>
         <TouchableOpacity
           onPress={() => {
