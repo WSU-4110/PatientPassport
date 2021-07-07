@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import auth, {firebase} from '@react-native-firebase/auth';
 import logo from './assets/img/PatientPassportLogo.png';
+import SingleUser from '../Components/userRegistration'
 
 let {height, width} = Dimensions.get('screen');
 
@@ -26,8 +27,8 @@ const RegistrationScreen = ({navigation}) => {
   // !-----------------------------
   const handleSuccessfulRegistration = (email, pass) => {
     //Pushed registration information to the database
-    auth()
-      .createUserWithEmailAndPassword(email, pass)
+    user = SingleUser.getSingleUser();
+    user.createUserWithEmailAndPassword(email, pass)
       .then(() => {
         auth().currentUser.sendEmailVerification();
         Alert.alert('Verification Email Sent');
