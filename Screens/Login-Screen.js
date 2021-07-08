@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+
+		/* importing react native components */
 import {
   StatusBar,
   Image,
@@ -19,6 +21,7 @@ import logo from './assets/img/PatientPassportLogo.png';
 
 import auth from '@react-native-firebase/auth';
 
+					/* login and password field functions */
 function LoginScreen({navigation}) {
   const [indicator, setIndicator] = useState(false);
   const [feilds, setFeilds] = useState([
@@ -222,7 +225,7 @@ function LoginScreen({navigation}) {
     </View>
   );
 }
-
+					/* login button format and style sheet */
 const styles = StyleSheet.create({
   container: {
     // marginTop: Constants.statusBarHeight,
