@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-		/* importing react native components */
+/* importing react native components */
 import {
   StatusBar,
   Image,
@@ -20,8 +20,9 @@ import colors from './config/Colors';
 import logo from './assets/img/PatientPassportLogo.png';
 
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
-					/* login and password field functions */
+/* login and password field functions */
 function LoginScreen({navigation}) {
   const [indicator, setIndicator] = useState(false);
   const [feilds, setFeilds] = useState([
@@ -51,7 +52,17 @@ function LoginScreen({navigation}) {
           Alert.alert('Verify your email to log in!');
           return;
         }
-        navigation.navigate('Initial Info');
+        userID = auth().currentUser.email;
+        firestore()
+          .collection('users')
+          .doc(userID)
+          .update({email: email})
+          .then(() => {
+            navigation.navigate('Homescreen');
+          })
+          .catch(error => {
+            navigation.navigate('Initial Info');
+          });
       })
       .catch(error => {
         if (
@@ -225,7 +236,7 @@ function LoginScreen({navigation}) {
     </View>
   );
 }
-					/* login button format and style sheet */
+/* login button format and style sheet */
 const styles = StyleSheet.create({
   container: {
     // marginTop: Constants.statusBarHeight,

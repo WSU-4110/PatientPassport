@@ -13,7 +13,7 @@ import SideMenuToggle from '../Components/SideMenuToggle.js';
 import auth, {firebase} from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 const InitialInfoScreen = ({navigation}) => {
-  const [isEditingInitalInfo, setIsEditingInitalInfo] = useState(false);
+  const [isEditingInitalInfo, setIsEditingInitalInfo] = useState(true);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [gender, setGender] = useState('');
@@ -28,6 +28,11 @@ const InitialInfoScreen = ({navigation}) => {
   const [smoke, setSmoke] = useState('');
 
   const storeData = () => {
+    if (!verifyComplete()) {
+      Alert.alert('Please fill out all fields');
+      return;
+    }
+
     var email = auth().currentUser.email;
 
     firestore()
@@ -48,8 +53,25 @@ const InitialInfoScreen = ({navigation}) => {
         smoke: smoke,
       })
       .then(() => {
-        Alert.alert('User added');
+        navigation.navigate('Homescreen');
       });
+  };
+
+  const verifyComplete = () => {
+    return (
+      firstName != '' &&
+      lastName != '' &&
+      gender != '' &&
+      DOB != '' &&
+      allergies != '' &&
+      knownDis != '' &&
+      vacc != '' &&
+      meds != '' &&
+      healthConditions != '' &&
+      doctors != '' &&
+      heart != '' &&
+      smoke != ''
+    );
   };
 
   const updateFirstName = value => {
@@ -145,7 +167,7 @@ const InitialInfoScreen = ({navigation}) => {
             initText=""
           />
           <ToggleableText
-            type="Alergies"
+            type="Allergies"
             editable={isEditingInitalInfo}
             callback={updateAllergies}
             initText=""
@@ -163,13 +185,13 @@ const InitialInfoScreen = ({navigation}) => {
             initText=""
           />
           <ToggleableText
-            type="Heart conditions"
+            type="Heart Conditions"
             editable={isEditingInitalInfo}
             callback={updateHeart}
             initText=""
           />
           <ToggleableText
-            type="currently taken medications"
+            type="Current Medications"
             editable={isEditingInitalInfo}
             callback={updateMeds}
             initText=""
@@ -181,25 +203,25 @@ const InitialInfoScreen = ({navigation}) => {
             initText=""
           />
           <ToggleableText
-            type="Known Doctors and locations"
+            type="Primary Care Physician"
             editable={isEditingInitalInfo}
             callback={updateDoctors}
             initText=""
           />
           <ToggleableText
-            type="Any Additional Health Concerns #1"
+            type="Additional Health Concerns #1"
             editable={isEditingInitalInfo}
             callback={updateHealthConditions}
             initText=""
           />
           <ToggleableText
-            type="Any Additional Health Concerns #2"
+            type="Additional Health Concerns #2"
             editable={isEditingInitalInfo}
             callback={updateHealthConditions}
             initText=""
           />
           <ToggleableText
-            type="Any Additional Health Concerns #3"
+            type="Additional Health Concerns #3"
             editable={isEditingInitalInfo}
             callback={updateHealthConditions}
             initText=""
@@ -210,7 +232,6 @@ const InitialInfoScreen = ({navigation}) => {
             if (isEditingInitalInfo) {
               storeData();
             }
-            setIsEditingInitalInfo(!isEditingInitalInfo);
           }}
           style={styles.editButton}>
           <Text>{isEditingInitalInfo ? 'Save' : 'Edit'}</Text>
