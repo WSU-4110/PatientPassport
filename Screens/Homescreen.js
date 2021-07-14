@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Text,
   View,
@@ -7,84 +7,221 @@ import {
   Image,
   StyleSheet,
   Alert,
+  StatusBar,
 } from 'react-native';
 import ToggleableText from '../Components/ToggleableText.js';
 import SideMenuToggle from '../Components/SideMenuToggle.js';
-import {firestore} from '@react-native-firebase/firestore';
-import auth, {firebase} from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import auth, { firebase } from '@react-native-firebase/auth';
+import AppTextButton from './components/AppTextButton.js';
+import Colors from './config/Colors.js';
 
-const Homescreen = ({navigation}) => {
+const Homescreen = ({ navigation }) => {
   const [isEditingBasicInfo, setIsEditingBasicInfo] = useState(false);
   const [isEditingInsurance, setIsEditingInsurance] = useState(false);
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [gender, setGender] = useState('');
-  const [DOB, setDOB] = useState('');
-  const [allergies, setAllergies] = useState('');
-  const [knownDis, setKnownDis] = useState('');
-  const [vacc, setVacc] = useState('');
-  const [meds, setMeds] = useState('');
-  const [healthConditions, setHealthConditions] = useState('');
-  const [doctors, setDoctors] = useState('');
-  const [heart, setHeart] = useState('');
-  const [smoke, setSmoke] = useState('');
-  const [values, setValues] = useState({});
+  const [values, setValues] = useState({
+    firstName: '',
+    lastName: '',
+    gender: '',
+    address: '',
+    DOB: '',
+    phoneNumber: '',
+    email: '',
+    emergContactName: '',
+    emergContactPhone: '',
+    emergContactEmail: '',
+    insuredName: '',
+    insuredEmployer: '',
+    insuredAddress: '',
+    primaryInsurance: '',
+    insuredID: '',
+    insuranceContact: '',
+    insuranceNotes: '',
+  });
+  const userID = auth().currentUser.email;
 
-  const getCurrentStatus = () => {
-    var user = auth().currentUser;
-    Alert.alert(user.email);
+  const setCurrentStatus = () => {
+    firestore()
+      .collection('users')
+      .doc(userID)
+      .update(values)
+      .catch(error => {
+        if (error.code === 'firestore/not-found') {
+          firestore().collection('users').doc(userID).set(values);
+        }
+      });
   };
 
   const updateFirstName = value => {
-    setFirstName(value);
+    setValues({
+      ...values,
+      firstName: value,
+    });
   };
 
   const updateLastName = value => {
-    setLastName(value);
+    setValues({
+      ...values,
+      lastName: value,
+    });
   };
 
   const updateGender = value => {
-    setGender(value);
+    setValues({
+      ...values,
+      gender: value,
+    });
   };
 
   const updateDOB = value => {
-    setDOB(value);
+    setValues({
+      ...values,
+      DOB: value,
+    });
   };
 
   const updateAllergies = value => {
-    setAllergies(value);
+    setValues({
+      ...values,
+      allergies: value,
+    });
   };
 
   const updateKnownDis = value => {
-    setKnownDis(value);
+    setValues({ ...values, knownDis: value });
   };
 
   const updateVacc = value => {
-    setVacc(value);
+    setValues({ ...values, vacc: value });
   };
 
   const updateMeds = value => {
-    setMeds(value);
+    setValues({ ...values, meds: value });
   };
 
   const updateHealthConditions = value => {
-    setHealthConditions(value);
+    setValues({ ...values, healthConditions: value });
   };
 
   const updateDoctors = value => {
-    setDoctors(value);
+    setValues({ ...values, doctors: value });
   };
 
   const updateHeart = value => {
-    setHeart(value);
+    setValues({ ...values, heart: value });
   };
 
   const updateSmoke = value => {
-    setSmoke(value);
+    setValues({ ...values, smoke: value });
   };
 
+  const updateAddress = value => {
+    setValues({
+      ...values,
+      address: value,
+    });
+  };
+
+  const updatePhoneNumber = value => {
+    let newPhone = { ...values, phoneNumber: value };
+    setValues(newPhone);
+  };
+
+  const updateEmergContactName = value => {
+    setValues({
+      ...values,
+      emergContactName: value,
+    });
+  };
+
+  const updateEmergContactPhone = value => {
+    setValues({
+      ...values,
+      emergContactPhone: value,
+    });
+  };
+
+  const updateEmergContactEmail = value => {
+    setValues({
+      ...values,
+      emergContactEmail: value,
+    });
+  };
+
+  const updateInsuredName = value => {
+    setValues({
+      ...values,
+      insuredName: value,
+    });
+  };
+
+  const updateInsuredDOB = value => {
+    setValues({
+      ...values,
+      insuredDOB: value,
+    });
+  };
+  const updateInsuredEmployer = value => {
+    setValues({
+      ...values,
+      insuredEmployer: value,
+    });
+  };
+
+  const updateInsuredAddress = value => {
+    setValues({
+      ...values,
+      insuredAddress: value,
+    });
+  };
+
+  const updatePrimaryInsurance = value => {
+    setValues({
+      ...values,
+      primaryInsurance: value,
+    });
+  };
+
+  const updateInsuranceAddress = value => {
+    setValues({
+      ...values,
+      insuranceAdress: value,
+    });
+  };
+
+  const updateInsuredID = value => {
+    setValues({
+      ...values,
+      insuredID: value,
+    });
+  };
+
+  const updateInsuranceContact = value => {
+    setValues({
+      ...values,
+      insuranceContact: value,
+    });
+  };
+
+  const updateInsuranceNotes = value => {
+    setValues({
+      ...values,
+      insuranceNotes: value,
+    });
+  };
+
+  useEffect(() => {
+    firestore()
+      .collection('users')
+      .doc(userID)
+      .onSnapshot(documentSnapshot => {
+        setValues(documentSnapshot.data());
+      });
+  }, []);
   return (
     <View style={styles.container}>
+
+      <StatusBar backgroundColor={'#001F3D'} />
       <View style={styles.header}>
         <Image
           style={styles.upperLogo}
@@ -93,6 +230,7 @@ const Homescreen = ({navigation}) => {
         <SideMenuToggle navigation={navigation} />
         <Text style={styles.headerText}>Patient Passport</Text>
       </View>
+
       <ScrollView
         style={styles.scrollable}
         contentContainerStyle={{
@@ -106,137 +244,171 @@ const Homescreen = ({navigation}) => {
             type="First Name"
             editable={isEditingBasicInfo}
             callback={updateFirstName}
+            initText={typeof values !== 'undefined' ? values.firstName : ''}
           />
           <ToggleableText
             type="Last Name"
             editable={isEditingBasicInfo}
             callback={updateLastName}
+            initText={typeof values !== 'undefined' ? values.lastName : ''}
+          />
+          <ToggleableText
+            type="Gender"
+            editable={isEditingBasicInfo}
+            callback={updateGender}
+            initText={typeof values !== 'undefined' ? values.gender : ''}
           />
           <ToggleableText
             type="Address"
             editable={isEditingBasicInfo}
-            callback={updateFirstName}
+            callback={updateAddress}
+            initText={typeof values !== 'undefined' ? values.address : ''}
           />
           <ToggleableText
             type="Date of Birth"
             editable={isEditingBasicInfo}
             callback={updateDOB}
+            initText={typeof values !== 'undefined' ? values.DOB : ''}
           />
           <ToggleableText
             type="Phone Number"
             editable={isEditingBasicInfo}
-            callback={updateFirstName}
+            callback={updatePhoneNumber}
+            initText={typeof values !== 'undefined' ? values.phoneNumber : ''}
           />
           <ToggleableText
             type="Email"
             editable={isEditingBasicInfo}
-            callback={updateFirstName}
+            callback={null}
+            initText={userID}
           />
           <ToggleableText
             type="Emergency Contact Name"
             editable={isEditingBasicInfo}
-            callback={updateFirstName}
+            callback={updateEmergContactName}
+            initText={
+              typeof values !== 'undefined' ? values.emergContactName : ''
+            }
           />
           <ToggleableText
             type="Emergency Contact Phone"
             editable={isEditingBasicInfo}
-            callback={updateFirstName}
+            callback={updateEmergContactPhone}
+            initText={
+              typeof values !== 'undefined' ? values.emergContactPhone : ''
+            }
           />
           <ToggleableText
             type="Emergency Contact Email"
             editable={isEditingBasicInfo}
-            callback={updateFirstName}
+            callback={updateEmergContactEmail}
+            initText={
+              typeof values !== 'undefined' ? values.emergContactEmail : ''
+            }
           />
         </View>
-        <TouchableOpacity
-          onPress={() => {
-            setIsEditingBasicInfo(!isEditingBasicInfo);
-          }}
-          style={styles.editButton}>
-          <Text>{isEditingBasicInfo ? 'Save' : 'Edit'}</Text>
-        </TouchableOpacity>
 
-        <View style={styles.basicInfo}>
+        {/* button */}
+        <View style={{ width: "50%", marginBottom: 30, marginTop: 20 }} >
+          <AppTextButton
+            name={isEditingBasicInfo ? 'Save' : 'Edit'}
+            borderRadius={10}
+            onSubmit={() => {
+              if (isEditingBasicInfo) {
+                setCurrentStatus();
+              }
+              setIsEditingBasicInfo(!isEditingBasicInfo);
+            }}
+            backgroundColor={Colors.MidnightBlue}
+            width="100%"
+            height={45}
+          />
+        </View>
+
+        <View style={[styles.basicInfo, { marginTop: 5 }]}>
           <Text style={styles.basicInfoHeader}>Insurance Information</Text>
           <ToggleableText
             type="Name of Insured Individual"
             editable={isEditingInsurance}
-            callback={updateFirstName}
+            callback={updateInsuredName}
+            initText={typeof values !== 'undefined' ? values.insuredName : ''}
           />
           <ToggleableText
             type="Date of Birth"
             editable={isEditingInsurance}
-            callback={updateFirstName}
+            callback={updateInsuredDOB}
+            initText={typeof values !== 'undefined' ? values.insuredDOB : ''}
           />
           <ToggleableText
             type="Employer"
             editable={isEditingInsurance}
-            callback={updateFirstName}
+            callback={updateInsuredEmployer}
+            initText={
+              typeof values !== 'undefined' ? values.insuredEmployer : ''
+            }
           />
           <ToggleableText
             type="Address"
             editable={isEditingInsurance}
-            callback={updateFirstName}
+            callback={updateInsuredAddress}
+            initText={
+              typeof values !== 'undefined' ? values.insuredAddress : ''
+            }
           />
           <ToggleableText
             type="Primary Insurance Company"
             editable={isEditingInsurance}
-            callback={updateFirstName}
+            callback={updatePrimaryInsurance}
+            initText={
+              typeof values !== 'undefined' ? values.primaryInsurance : ''
+            }
           />
           <ToggleableText
             type="Address"
             editable={isEditingInsurance}
-            callback={updateFirstName}
+            callback={updateInsuranceAddress}
+            initText={
+              typeof values !== 'undefined' ? values.insuranceAdress : ''
+            }
           />
           <ToggleableText
             type="Insured ID"
             editable={isEditingInsurance}
-            callback={updateFirstName}
+            callback={updateInsuredID}
+            initText={typeof values !== 'undefined' ? values.insuredID : ''}
           />
           <ToggleableText
             type="Contact"
             editable={isEditingInsurance}
-            callback={updateFirstName}
+            callback={updateInsuranceContact}
+            initText={
+              typeof values !== 'undefined' ? values.insuranceContact : ''
+            }
           />
           <ToggleableText
             type="Notes"
             editable={isEditingInsurance}
-            callback={updateFirstName}
-          />
-          <ToggleableText
-            type="Secondary Insurance"
-            editable={isEditingInsurance}
-            callback={updateFirstName}
-          />
-          <ToggleableText
-            type="Address"
-            editable={isEditingInsurance}
-            callback={updateFirstName}
-          />
-          <ToggleableText
-            type="Insured ID"
-            editable={isEditingInsurance}
-            callback={updateFirstName}
-          />
-          <ToggleableText
-            type="Contact"
-            editable={isEditingInsurance}
-            callback={updateFirstName}
-          />
-          <ToggleableText
-            type="Notes"
-            editable={isEditingInsurance}
-            callback={updateFirstName}
+            callback={updateInsuranceNotes}
+            initText={
+              typeof values !== 'undefined' ? values.insuranceNotes : ''
+            }
           />
         </View>
-        <TouchableOpacity
-          onPress={() => {
-            setIsEditingInsurance(!isEditingInsurance);
-            getCurrentStatus();
-          }}
-          style={styles.editButton}>
-          <Text>{isEditingInsurance ? 'Save' : 'Edit'}</Text>
-        </TouchableOpacity>
+
+        {/* button */}
+        <View style={{ width: "50%", marginBottom: 30, marginTop: 20 }} >
+          <AppTextButton
+            name={isEditingInsurance ? 'Save' : 'Edit'}
+            borderRadius={10}
+            onSubmit={() => {
+              if (isEditingInsurance) setCurrentStatus();
+              setIsEditingInsurance(!isEditingInsurance);
+            }}
+            backgroundColor={Colors.MidnightBlue}
+            width="100%"
+            height={45}
+          />
+        </View>
       </ScrollView>
     </View>
   );
@@ -257,7 +429,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   header: {
-    height: 90,
+    height: 56,
     backgroundColor: '#001F3D',
     display: 'flex',
     alignItems: 'center',
@@ -272,25 +444,25 @@ const styles = StyleSheet.create({
   },
   upperLogo: {
     position: 'absolute',
-    height: 70,
-    width: 70,
-    right: 5,
+    height: 50,
+    width: 50,
+    right: 20,
   },
   scrollable: {
-    backgroundColor: '#055772',
+    backgroundColor: 'white',
   },
   basicInfo: {
     marginTop: '10%',
-    width: '70%',
+    width: '80%',
     display: 'flex',
     justifyContent: 'center',
   },
   basicInfoHeader: {
-    color: 'white',
+    color: '#000000',
     textAlign: 'center',
-    fontSize: 25,
+    fontSize: 30,
     fontFamily: 'times new roman',
-    marginBottom: '5%',
+    marginBottom: '10%',
   },
   editButton: {
     backgroundColor: '#09A9C8',

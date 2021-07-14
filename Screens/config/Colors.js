@@ -5,5 +5,6 @@ export default {
     BlueGrotto: "#067593",
     white: "#ffffff",
     grey: "#bfbfbf",
+    darkGrey: "#565656",
     lightGrey: "#f2f2f2"
 }
