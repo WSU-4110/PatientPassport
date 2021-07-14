@@ -40,6 +40,7 @@ const RegistrationScreen = ({navigation}) => {
   };
 
   const onSingup = () => {
+    //Checks to make sure fields are filled out properly
     if (name && email && pass && cpass && pass === cpass) {
       handleSuccessfulRegistration(email, pass);
     } else if (pass != cpass)
@@ -151,7 +152,9 @@ const RegistrationScreen = ({navigation}) => {
 };
 
 export default RegistrationScreen;
-
+//--------------------
+//    STYLESHEET
+//--------------------
 const styles = StyleSheet.create({
   heading: {
     fontSize: 22,

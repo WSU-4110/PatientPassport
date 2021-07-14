@@ -5,6 +5,7 @@ import firestore from '@react-native-firebase/firestore';
 
 const Settings = ({navigation}) => {
   const handlePress = () => {
+    // Handles Deleting User
     Alert.alert(
       'Are you sure?',
       'Deleting an account cannot be undone. All data will be lost.',
@@ -48,6 +49,9 @@ const Settings = ({navigation}) => {
   );
 };
 
+// ----------------------
+//    STYLESHEET
+// ----------------------
 styles = StyleSheet.create({
   deleteButton: {
     marginTop: 200,

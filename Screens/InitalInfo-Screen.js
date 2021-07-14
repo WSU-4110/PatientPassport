@@ -28,11 +28,13 @@ const InitialInfoScreen = ({navigation}) => {
   const [smoke, setSmoke] = useState('');
 
   const storeData = () => {
+    //Checks to make sure all fields are filled out
     if (!verifyComplete()) {
       Alert.alert('Please fill out all fields');
       return;
     }
 
+    //Stores data
     var email = auth().currentUser.email;
 
     firestore()
@@ -58,6 +60,7 @@ const InitialInfoScreen = ({navigation}) => {
   };
 
   const verifyComplete = () => {
+    //Verifies all fields are filled out
     return (
       firstName != '' &&
       lastName != '' &&
@@ -238,10 +241,12 @@ const InitialInfoScreen = ({navigation}) => {
         </TouchableOpacity>
       </ScrollView>
     </View>
-    // additonal content can be added
   );
 };
 
+//--------------------
+//    STYLESHEET
+//--------------------
 const styles = StyleSheet.create({
   button: {
     height: 70,

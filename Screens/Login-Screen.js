@@ -236,7 +236,10 @@ function LoginScreen({navigation}) {
     </View>
   );
 }
-/* login button format and style sheet */
+
+//--------------------
+//    STYLESHEET
+//--------------------
 const styles = StyleSheet.create({
   container: {
     // marginTop: Constants.statusBarHeight,

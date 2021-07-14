@@ -8,9 +8,7 @@
 
 import 'react-native-gesture-handler';
 import React from 'react';
-import {Node} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
 import LoginScreen from './Screens/Login-Screen.js';
 import RegistrationScreen from './Screens/Registration-Screen.js';
 import InitialInfoScreen from './Screens/InitalInfo-Screen.js';
@@ -20,8 +18,10 @@ import Settings from './Screens/settings';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
 const Drawer = createDrawerNavigator();
-const Stack = createStackNavigator();
 
+//--------------------
+//   MAIN FUNCTION
+//--------------------
 const App = () => {
   return (
     <NavigationContainer>

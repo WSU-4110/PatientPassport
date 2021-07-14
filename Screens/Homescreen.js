@@ -35,9 +35,12 @@ const Homescreen = ({navigation}) => {
     insuranceContact: '',
     insuranceNotes: '',
   });
+
+  //User ID
   const userID = auth().currentUser.email;
 
   const setCurrentStatus = () => {
+    // Deals with updating DB based on values object
     firestore()
       .collection('users')
       .doc(userID)
@@ -207,6 +210,9 @@ const Homescreen = ({navigation}) => {
     });
   };
 
+  //--------------------
+  // Gets Data from DB
+  //--------------------
   useEffect(() => {
     firestore()
       .collection('users')
@@ -216,6 +222,7 @@ const Homescreen = ({navigation}) => {
       });
   }, []);
   return (
+    //Returns screen w/ all components
     <View style={styles.container}>
       <View style={styles.header}>
         <Image
@@ -394,6 +401,9 @@ const Homescreen = ({navigation}) => {
   );
 };
 
+//--------------------
+//    STYLESHEET
+//--------------------
 const styles = StyleSheet.create({
   button: {
     height: 70,
