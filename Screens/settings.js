@@ -1,11 +1,14 @@
 import React from 'react';
-import {View, TouchableOpacity, StyleSheet, Text, Alert} from 'react-native';
-import auth, {firebase} from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
 
-const Settings = ({navigation}) => {
+import { View, TouchableOpacity, StyleSheet, Text, Alert, StatusBar, Image } from 'react-native';
+import auth, { firebase } from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import AppTextButton from './components/AppTextButton';
+import Colors from './config/Colors';
+import SideMenuToggle from '../Components/SideMenuToggle';
+
+const Settings = ({ navigation }) => {
   const handlePress = () => {
-    // Handles Deleting User
     Alert.alert(
       'Are you sure?',
       'Deleting an account cannot be undone. All data will be lost.',
@@ -39,20 +42,39 @@ const Settings = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor={'#001F3D'} />
+      <View style={styles.header1}>
+        <Image
+          style={styles.upperLogo}
+          source={require('../AppDesignDocs/PatientPassport_Logo.png')}
+        />
+        <SideMenuToggle navigation={navigation} />
+      </View>
+
+
       <View style={styles.header}>
         <Text style={styles.headerText}>Settings</Text>
       </View>
-      <TouchableOpacity style={styles.deleteButton} onPress={handlePress}>
-        <Text>Delete Account</Text>
-      </TouchableOpacity>
+      {/* button */}
+      <View style={{ marginTop: 40, width: '50%', flex: 1, alignItems: 'flex-end' }}>
+        <AppTextButton
+          name="Delete Account"
+          borderRadius={10.4}
+          onSubmit={() => handlePress()}
+          backgroundColor={"#c92222"}
+          width="100%"
+          height={45}
+        />
+      </View>
     </View>
   );
 };
 
+
 // ----------------------
 //    STYLESHEET
 // ----------------------
-styles = StyleSheet.create({
+const styles = StyleSheet.create({
   deleteButton: {
     marginTop: 200,
     backgroundColor: 'red',
@@ -66,8 +88,18 @@ styles = StyleSheet.create({
   container: {
     display: 'flex',
     alignItems: 'center',
-    backgroundColor: '#055772',
+    backgroundColor: 'white',
     height: '100%',
+  },
+  header1: {
+    height: 56,
+    width: "100%",
+    backgroundColor: '#001F3D',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    position: 'relative',
   },
   header: {
     display: 'flex',
@@ -77,10 +109,17 @@ styles = StyleSheet.create({
     height: 100,
   },
   headerText: {
-    color: 'white',
+
+    color: 'black',
     fontSize: 48,
     fontFamily: 'times new roman',
     paddingTop: 60,
+  },
+  upperLogo: {
+    position: 'absolute',
+    height: 50,
+    width: 50,
+    right: 20,
   },
 });
 

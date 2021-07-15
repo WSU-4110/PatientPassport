@@ -1,7 +1,7 @@
-import {View, TouchableOpacity} from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import React from 'react';
 
-const SideMenuToggle = ({navigation}) => {
+const SideMenuToggle = ({ navigation }) => {
   return (
     <TouchableOpacity
       style={{
@@ -13,7 +13,6 @@ const SideMenuToggle = ({navigation}) => {
         width: 70,
         position: 'absolute',
         left: 5,
-        top: 0,
       }}
       onPress={() => {
         navigation.toggleDrawer();
@@ -21,26 +20,26 @@ const SideMenuToggle = ({navigation}) => {
       <View
         style={{
           backgroundColor: 'white',
-          width: '50%',
-          height: 5,
+          width: '35%',
+          height: 1.5,
         }}
-        opacity={0.7}></View>
+      ></View>
       <View
         style={{
           backgroundColor: 'white',
-          width: '50%',
-          height: 5,
+          width: '35%',
+          height: 1.5,
           marginTop: 7,
         }}
-        opacity={0.7}></View>
+      ></View>
       <View
         style={{
           backgroundColor: 'white',
-          width: '50%',
-          height: 5,
+          width: '35%',
+          height: 1.5,
           marginTop: 7,
         }}
-        opacity={0.7}></View>
+      ></View>
     </TouchableOpacity>
   );
 };
