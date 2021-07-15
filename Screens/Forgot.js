@@ -25,6 +25,7 @@ import Colors from './config/Colors';
 let { height, width } = Dimensions.get('screen');
 
 const ForgotPassword = () => {
+
   //setting default values to variables
 
   const [email, setEmail] = useState('');
@@ -73,7 +74,6 @@ const ForgotPassword = () => {
           />
         </View>
       </View>
-
       {indicator
         ? <View
           style={{

@@ -71,6 +71,7 @@ const RegistrationScreen = ({ navigation }) => {
   };
 
   const onSingup = () => {
+
     setIndicator(true)
 
     let name = feilds[0].value;

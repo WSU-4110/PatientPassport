@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { View, TouchableOpacity, StyleSheet, Text, Alert, StatusBar, Image } from 'react-native';
 import auth, { firebase } from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
@@ -69,6 +70,10 @@ const Settings = ({ navigation }) => {
   );
 };
 
+
+// ----------------------
+//    STYLESHEET
+// ----------------------
 const styles = StyleSheet.create({
   deleteButton: {
     marginTop: 200,
@@ -104,6 +109,7 @@ const styles = StyleSheet.create({
     height: 100,
   },
   headerText: {
+
     color: 'black',
     fontSize: 48,
     fontFamily: 'times new roman',

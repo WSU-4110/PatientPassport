@@ -31,6 +31,13 @@ const InitialInfoScreen = ({ navigation }) => {
   const [smoke, setSmoke] = useState('');
 
   const storeData = () => {
+    //Checks to make sure all fields are filled out
+    if (!verifyComplete()) {
+      Alert.alert('Please fill out all fields');
+      return;
+    }
+
+    //Stores data
     var email = auth().currentUser.email;
 
     firestore()
@@ -54,6 +61,24 @@ const InitialInfoScreen = ({ navigation }) => {
         Alert.alert('User added');
         navigation.navigate('Homescreen')
       });
+  };
+
+  const verifyComplete = () => {
+    //Verifies all fields are filled out
+    return (
+      firstName != '' &&
+      lastName != '' &&
+      gender != '' &&
+      DOB != '' &&
+      allergies != '' &&
+      knownDis != '' &&
+      vacc != '' &&
+      meds != '' &&
+      healthConditions != '' &&
+      doctors != '' &&
+      heart != '' &&
+      smoke != ''
+    );
   };
 
   const updateFirstName = value => {
@@ -150,7 +175,7 @@ const InitialInfoScreen = ({ navigation }) => {
             initText=""
           />
           <ToggleableText
-            type="Alergies"
+            type="Allergies"
             editable={isEditingInitalInfo}
             callback={updateAllergies}
             initText=""
@@ -168,13 +193,13 @@ const InitialInfoScreen = ({ navigation }) => {
             initText=""
           />
           <ToggleableText
-            type="Heart conditions"
+            type="Heart Conditions"
             editable={isEditingInitalInfo}
             callback={updateHeart}
             initText=""
           />
           <ToggleableText
-            type="Current Medication"
+            type="Current Medications"
             editable={isEditingInitalInfo}
             callback={updateMeds}
             initText=""
@@ -186,25 +211,25 @@ const InitialInfoScreen = ({ navigation }) => {
             initText=""
           />
           <ToggleableText
-            type="Current Physician"
+            type="Primary Care Physician"
             editable={isEditingInitalInfo}
             callback={updateDoctors}
             initText=""
           />
           <ToggleableText
-            type="Any Additional Health Concerns #1"
+            type="Additional Health Concerns #1"
             editable={isEditingInitalInfo}
             callback={updateHealthConditions}
             initText=""
           />
           <ToggleableText
-            type="Any Additional Health Concerns #2"
+            type="Additional Health Concerns #2"
             editable={isEditingInitalInfo}
             callback={updateHealthConditions}
             initText=""
           />
           <ToggleableText
-            type="Any Additional Health Concerns #3"
+            type="Additional Health Concerns #3"
             editable={isEditingInitalInfo}
             callback={updateHealthConditions}
             initText=""
@@ -230,10 +255,12 @@ const InitialInfoScreen = ({ navigation }) => {
         </View>
       </ScrollView>
     </View>
-    // additonal content can be added
   );
 };
 
+//--------------------
+//    STYLESHEET
+//--------------------
 const styles = StyleSheet.create({
   button: {
     height: 70,

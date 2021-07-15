@@ -21,8 +21,10 @@ import Colors from './Screens/config/Colors.js';
 import Settings from './Screens/settings.js';
 
 const Drawer = createDrawerNavigator();
-const Stack = createStackNavigator();
 
+//--------------------
+//   MAIN FUNCTION
+//--------------------
 const App = () => {
   return (
     <NavigationContainer>

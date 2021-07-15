@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import {
   Text,
@@ -38,8 +39,10 @@ const Homescreen = ({ navigation }) => {
     insuranceContact: '',
     insuranceNotes: '',
   });
+
   const userID = auth().currentUser.email;
 
+  // Deals with updating DB based on values object
   const setCurrentStatus = () => {
     firestore()
       .collection('users')
@@ -210,6 +213,10 @@ const Homescreen = ({ navigation }) => {
     });
   };
 
+
+  //--------------------
+  // Gets Data from DB
+  //--------------------
   useEffect(() => {
     firestore()
       .collection('users')
@@ -219,6 +226,7 @@ const Homescreen = ({ navigation }) => {
       });
   }, []);
   return (
+    //Returns screen w/ all components
     <View style={styles.container}>
 
       <StatusBar backgroundColor={'#001F3D'} />
@@ -307,6 +315,17 @@ const Homescreen = ({ navigation }) => {
             }
           />
         </View>
+
+        <TouchableOpacity
+          onPress={() => {
+            if (isEditingBasicInfo) {
+              setCurrentStatus();
+            }
+            setIsEditingBasicInfo(!isEditingBasicInfo);
+          }}
+          style={styles.editButton}>
+          <Text>{isEditingBasicInfo ? 'Save' : 'Edit'}</Text>
+        </TouchableOpacity>
 
         {/* button */}
         <View style={{ width: "50%", marginBottom: 30, marginTop: 20 }} >
@@ -414,6 +433,9 @@ const Homescreen = ({ navigation }) => {
   );
 };
 
+//--------------------
+//    STYLESHEET
+//--------------------
 const styles = StyleSheet.create({
   button: {
     height: 70,
