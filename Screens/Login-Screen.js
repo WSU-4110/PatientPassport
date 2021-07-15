@@ -21,6 +21,7 @@ import logo from './assets/img/PatientPassportLogo.png';
 
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import {useEffect} from 'react/cjs/react.development';
 
 /* login and password field functions */
 function LoginScreen({navigation}) {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   Text,
   View,
@@ -11,11 +11,11 @@ import {
 } from 'react-native';
 import ToggleableText from '../Components/ToggleableText.js';
 import SideMenuToggle from '../Components/SideMenuToggle.js';
-import auth, { firebase } from '@react-native-firebase/auth';
+import auth, {firebase} from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import AppTextButton from './components/AppTextButton.js';
 import Colors from './config/Colors.js';
-const InitialInfoScreen = ({ navigation }) => {
+const InitialInfoScreen = ({navigation}) => {
   const [isEditingInitalInfo, setIsEditingInitalInfo] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -59,7 +59,7 @@ const InitialInfoScreen = ({ navigation }) => {
       })
       .then(() => {
         Alert.alert('User added');
-        navigation.navigate('Homescreen')
+        navigation.navigate('Homescreen');
       });
   };
 
@@ -236,9 +236,8 @@ const InitialInfoScreen = ({ navigation }) => {
           />
         </View>
 
-
         {/* button */}
-        <View style={{ width: "50%", marginBottom: 20, marginTop: 20 }} >
+        <View style={{width: '50%', marginBottom: 20, marginTop: 20}}>
           <AppTextButton
             name={isEditingInitalInfo ? 'Save' : 'Edit'}
             borderRadius={10}
@@ -311,7 +310,6 @@ const styles = StyleSheet.create({
     fontFamily: 'times new roman',
     marginBottom: '10%',
   },
-
 });
 
 export default InitialInfoScreen;

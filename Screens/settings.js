@@ -1,13 +1,21 @@
 import React from 'react';
 
-import { View, TouchableOpacity, StyleSheet, Text, Alert, StatusBar, Image } from 'react-native';
-import auth, { firebase } from '@react-native-firebase/auth';
+import {
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  Text,
+  Alert,
+  StatusBar,
+  Image,
+} from 'react-native';
+import auth, {firebase} from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import AppTextButton from './components/AppTextButton';
 import Colors from './config/Colors';
 import SideMenuToggle from '../Components/SideMenuToggle';
 
-const Settings = ({ navigation }) => {
+const Settings = ({navigation}) => {
   const handlePress = () => {
     Alert.alert(
       'Are you sure?',
@@ -51,17 +59,17 @@ const Settings = ({ navigation }) => {
         <SideMenuToggle navigation={navigation} />
       </View>
 
-
       <View style={styles.header}>
         <Text style={styles.headerText}>Settings</Text>
       </View>
       {/* button */}
-      <View style={{ marginTop: 40, width: '50%', flex: 1, alignItems: 'flex-end' }}>
+      <View
+        style={{marginTop: 40, width: '50%', flex: 1, alignItems: 'flex-end'}}>
         <AppTextButton
           name="Delete Account"
           borderRadius={10.4}
           onSubmit={() => handlePress()}
-          backgroundColor={"#c92222"}
+          backgroundColor={'#c92222'}
           width="100%"
           height={45}
         />
@@ -69,7 +77,6 @@ const Settings = ({ navigation }) => {
     </View>
   );
 };
-
 
 // ----------------------
 //    STYLESHEET
@@ -93,7 +100,7 @@ const styles = StyleSheet.create({
   },
   header1: {
     height: 56,
-    width: "100%",
+    width: '100%',
     backgroundColor: '#001F3D',
     display: 'flex',
     alignItems: 'center',
@@ -109,7 +116,6 @@ const styles = StyleSheet.create({
     height: 100,
   },
   headerText: {
-
     color: 'black',
     fontSize: 48,
     fontFamily: 'times new roman',

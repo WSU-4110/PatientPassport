@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -12,16 +12,16 @@ import {
   StatusBar,
   ActivityIndicator,
 } from 'react-native';
-import auth, { firebase } from '@react-native-firebase/auth';
+import auth, {firebase} from '@react-native-firebase/auth';
 import Colors from './config/Colors';
 import AppTextButton from './components/AppTextButton';
 
 import logo from './assets/img/PatientPassportLogo.png';
 import AppTextInput from './components/AppTextInput';
 
-let { height, width } = Dimensions.get('screen');
+let {height, width} = Dimensions.get('screen');
 
-const RegistrationScreen = ({ navigation }) => {
+const RegistrationScreen = ({navigation}) => {
   const [indicator, setIndicator] = useState(false);
   const [feilds, setFeilds] = useState([
     {
@@ -59,33 +59,32 @@ const RegistrationScreen = ({ navigation }) => {
         auth().currentUser.sendEmailVerification();
         Alert.alert('Email verification sent!');
         navigation.navigate('Login');
-        setIndicator(false)
+        setIndicator(false);
       })
       .catch(error => {
         if (error.code === 'auth/email-already-in-use')
           Alert.alert('Email already in use');
         if (error.code === 'auth/invalid-email') Alert.alert('Invalid email');
 
-        setIndicator(false)
+        setIndicator(false);
       });
   };
 
   const onSingup = () => {
-
-    setIndicator(true)
+    setIndicator(true);
 
     let name = feilds[0].value;
     let email = feilds[1].value;
     let pass = feilds[2].value;
     let cpass = feilds[3].value;
-    console.log("email......: ", name, email, pass, cpass)
+    console.log('email......: ', name, email, pass, cpass);
     if (name && email && pass && cpass && pass === cpass) {
       handleSuccessfulRegistration(email, pass);
     } else if (pass != cpass)
-      Alert.alert('Error', 'Passwords do not match', [{ text: 'OK' }]);
-    else Alert.alert('Error', 'All fields are required.', [{ text: 'OK' }]);
+      Alert.alert('Error', 'Passwords do not match', [{text: 'OK'}]);
+    else Alert.alert('Error', 'All fields are required.', [{text: 'OK'}]);
 
-    setIndicator(false)
+    setIndicator(false);
   };
 
   const handleChange = (text, id) => {
@@ -96,7 +95,11 @@ const RegistrationScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <StatusBar position="bottom" style="light" backgroundColor={Colors.MidnightBlue} />
+      <StatusBar
+        position="bottom"
+        style="light"
+        backgroundColor={Colors.MidnightBlue}
+      />
 
       {/* top container */}
       <View
@@ -117,14 +120,14 @@ const RegistrationScreen = ({ navigation }) => {
           }}>
           <Image
             resizeMethod="auto"
-            style={{ marginBottom: 60, width: 166, height: 130 }}
+            style={{marginBottom: 60, width: 166, height: 130}}
             source={logo}
           />
         </View>
       </View>
 
-      {indicator
-        ? <View
+      {indicator ? (
+        <View
           style={{
             marginTop: -56,
             borderTopLeftRadius: 64,
@@ -137,13 +140,26 @@ const RegistrationScreen = ({ navigation }) => {
           }}>
           <ActivityIndicator color={Colors.MidnightBlue} size={48} />
         </View>
-        : <>
+      ) : (
+        <>
           {/* Bottom Contaienr */}
-          <View style={{ marginTop: -56, borderTopLeftRadius: 64, backgroundColor: Colors.lightGrey, width: "100%", flex: 1.8, flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} >
-            <ScrollView style={{ width: '85%' }} >
+          <View
+            style={{
+              marginTop: -56,
+              borderTopLeftRadius: 64,
+              backgroundColor: Colors.lightGrey,
+              width: '100%',
+              flex: 1.8,
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <ScrollView style={{width: '85%'}}>
               {/* Text feilds */}
-              {feilds.map((item, i) =>
-                <View key={i} style={{ marginTop: i == 0 ? 80 : 32, width: '100%', }}>
+              {feilds.map((item, i) => (
+                <View
+                  key={i}
+                  style={{marginTop: i == 0 ? 80 : 32, width: '100%'}}>
                   <AppTextInput
                     placeHolder={item.placeHolder}
                     width="100%"
@@ -152,10 +168,16 @@ const RegistrationScreen = ({ navigation }) => {
                     secure={item.secure}
                   />
                 </View>
-              )}
+              ))}
 
               {/* SignUp button */}
-              <View style={{ marginTop: 40, width: '100%', flex: 1, alignItems: 'flex-end' }} >
+              <View
+                style={{
+                  marginTop: 40,
+                  width: '100%',
+                  flex: 1,
+                  alignItems: 'flex-end',
+                }}>
                 <AppTextButton
                   name="Sign Up"
                   borderRadius={10.4}
@@ -174,11 +196,10 @@ const RegistrationScreen = ({ navigation }) => {
                   flexDirection: 'row',
                   justifyContent: 'center',
                 }}>
-                <Text style={{ color: 'grey', fontSize: 14 }}>
+                <Text style={{color: 'grey', fontSize: 14}}>
                   Already have an account?{' '}
                 </Text>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate('Login')}>
+                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                   <Text
                     style={{
                       color: Colors.BabyBlue,
@@ -191,13 +212,11 @@ const RegistrationScreen = ({ navigation }) => {
               </View>
             </ScrollView>
           </View>
-
         </>
-      }
-
+      )}
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -206,8 +225,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.lightGrey,
     alignItems: 'center',
     justifyContent: 'center',
-    width: "100%"
+    width: '100%',
   },
-})
+});
 
 export default RegistrationScreen;

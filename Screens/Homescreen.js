@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   View,
@@ -13,11 +12,11 @@ import {
 import ToggleableText from '../Components/ToggleableText.js';
 import SideMenuToggle from '../Components/SideMenuToggle.js';
 import firestore from '@react-native-firebase/firestore';
-import auth, { firebase } from '@react-native-firebase/auth';
+import auth from '@react-native-firebase/auth';
 import AppTextButton from './components/AppTextButton.js';
 import Colors from './config/Colors.js';
 
-const Homescreen = ({ navigation }) => {
+const Homescreen = ({navigation}) => {
   const [isEditingBasicInfo, setIsEditingBasicInfo] = useState(false);
   const [isEditingInsurance, setIsEditingInsurance] = useState(false);
   const [values, setValues] = useState({
@@ -91,31 +90,31 @@ const Homescreen = ({ navigation }) => {
   };
 
   const updateKnownDis = value => {
-    setValues({ ...values, knownDis: value });
+    setValues({...values, knownDis: value});
   };
 
   const updateVacc = value => {
-    setValues({ ...values, vacc: value });
+    setValues({...values, vacc: value});
   };
 
   const updateMeds = value => {
-    setValues({ ...values, meds: value });
+    setValues({...values, meds: value});
   };
 
   const updateHealthConditions = value => {
-    setValues({ ...values, healthConditions: value });
+    setValues({...values, healthConditions: value});
   };
 
   const updateDoctors = value => {
-    setValues({ ...values, doctors: value });
+    setValues({...values, doctors: value});
   };
 
   const updateHeart = value => {
-    setValues({ ...values, heart: value });
+    setValues({...values, heart: value});
   };
 
   const updateSmoke = value => {
-    setValues({ ...values, smoke: value });
+    setValues({...values, smoke: value});
   };
 
   const updateAddress = value => {
@@ -126,7 +125,7 @@ const Homescreen = ({ navigation }) => {
   };
 
   const updatePhoneNumber = value => {
-    let newPhone = { ...values, phoneNumber: value };
+    let newPhone = {...values, phoneNumber: value};
     setValues(newPhone);
   };
 
@@ -213,7 +212,6 @@ const Homescreen = ({ navigation }) => {
     });
   };
 
-
   //--------------------
   // Gets Data from DB
   //--------------------
@@ -228,7 +226,6 @@ const Homescreen = ({ navigation }) => {
   return (
     //Returns screen w/ all components
     <View style={styles.container}>
-
       <StatusBar backgroundColor={'#001F3D'} />
       <View style={styles.header}>
         <Image
@@ -316,19 +313,8 @@ const Homescreen = ({ navigation }) => {
           />
         </View>
 
-        <TouchableOpacity
-          onPress={() => {
-            if (isEditingBasicInfo) {
-              setCurrentStatus();
-            }
-            setIsEditingBasicInfo(!isEditingBasicInfo);
-          }}
-          style={styles.editButton}>
-          <Text>{isEditingBasicInfo ? 'Save' : 'Edit'}</Text>
-        </TouchableOpacity>
-
         {/* button */}
-        <View style={{ width: "50%", marginBottom: 30, marginTop: 20 }} >
+        <View style={{width: '50%', marginBottom: 30, marginTop: 20}}>
           <AppTextButton
             name={isEditingBasicInfo ? 'Save' : 'Edit'}
             borderRadius={10}
@@ -344,7 +330,7 @@ const Homescreen = ({ navigation }) => {
           />
         </View>
 
-        <View style={[styles.basicInfo, { marginTop: 5 }]}>
+        <View style={[styles.basicInfo, {marginTop: 5}]}>
           <Text style={styles.basicInfoHeader}>Insurance Information</Text>
           <ToggleableText
             type="Name of Insured Individual"
@@ -415,7 +401,7 @@ const Homescreen = ({ navigation }) => {
         </View>
 
         {/* button */}
-        <View style={{ width: "50%", marginBottom: 30, marginTop: 20 }} >
+        <View style={{width: '50%', marginBottom: 30, marginTop: 20}}>
           <AppTextButton
             name={isEditingInsurance ? 'Save' : 'Edit'}
             borderRadius={10}
