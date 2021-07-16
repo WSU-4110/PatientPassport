@@ -7,11 +7,14 @@ import {
   Image,
   StyleSheet,
   Alert,
+  StatusBar,
 } from 'react-native';
 import ToggleableText from '../Components/ToggleableText.js';
 import SideMenuToggle from '../Components/SideMenuToggle.js';
 import firestore from '@react-native-firebase/firestore';
-import auth, {firebase} from '@react-native-firebase/auth';
+import auth from '@react-native-firebase/auth';
+import AppTextButton from './components/AppTextButton.js';
+import Colors from './config/Colors.js';
 
 const Homescreen = ({navigation}) => {
   const [isEditingBasicInfo, setIsEditingBasicInfo] = useState(false);
@@ -36,11 +39,10 @@ const Homescreen = ({navigation}) => {
     insuranceNotes: '',
   });
 
-  //User ID
   const userID = auth().currentUser.email;
 
+  // Deals with updating DB based on values object
   const setCurrentStatus = () => {
-    // Deals with updating DB based on values object
     firestore()
       .collection('users')
       .doc(userID)
@@ -224,6 +226,7 @@ const Homescreen = ({navigation}) => {
   return (
     //Returns screen w/ all components
     <View style={styles.container}>
+      <StatusBar backgroundColor={'#001F3D'} />
       <View style={styles.header}>
         <Image
           style={styles.upperLogo}
@@ -232,6 +235,7 @@ const Homescreen = ({navigation}) => {
         <SideMenuToggle navigation={navigation} />
         <Text style={styles.headerText}>Patient Passport</Text>
       </View>
+
       <ScrollView
         style={styles.scrollable}
         contentContainerStyle={{
@@ -308,18 +312,25 @@ const Homescreen = ({navigation}) => {
             }
           />
         </View>
-        <TouchableOpacity
-          onPress={() => {
-            if (isEditingBasicInfo) {
-              setCurrentStatus();
-            }
-            setIsEditingBasicInfo(!isEditingBasicInfo);
-          }}
-          style={styles.editButton}>
-          <Text>{isEditingBasicInfo ? 'Save' : 'Edit'}</Text>
-        </TouchableOpacity>
 
-        <View style={styles.basicInfo}>
+        {/* button */}
+        <View style={{width: '50%', marginBottom: 30, marginTop: 20}}>
+          <AppTextButton
+            name={isEditingBasicInfo ? 'Save' : 'Edit'}
+            borderRadius={10}
+            onSubmit={() => {
+              if (isEditingBasicInfo) {
+                setCurrentStatus();
+              }
+              setIsEditingBasicInfo(!isEditingBasicInfo);
+            }}
+            backgroundColor={Colors.MidnightBlue}
+            width="100%"
+            height={45}
+          />
+        </View>
+
+        <View style={[styles.basicInfo, {marginTop: 5}]}>
           <Text style={styles.basicInfoHeader}>Insurance Information</Text>
           <ToggleableText
             type="Name of Insured Individual"
@@ -388,14 +399,21 @@ const Homescreen = ({navigation}) => {
             }
           />
         </View>
-        <TouchableOpacity
-          onPress={() => {
-            if (isEditingInsurance) setCurrentStatus();
-            setIsEditingInsurance(!isEditingInsurance);
-          }}
-          style={styles.editButton}>
-          <Text>{isEditingInsurance ? 'Save' : 'Edit'}</Text>
-        </TouchableOpacity>
+
+        {/* button */}
+        <View style={{width: '50%', marginBottom: 30, marginTop: 20}}>
+          <AppTextButton
+            name={isEditingInsurance ? 'Save' : 'Edit'}
+            borderRadius={10}
+            onSubmit={() => {
+              if (isEditingInsurance) setCurrentStatus();
+              setIsEditingInsurance(!isEditingInsurance);
+            }}
+            backgroundColor={Colors.MidnightBlue}
+            width="100%"
+            height={45}
+          />
+        </View>
       </ScrollView>
     </View>
   );
@@ -419,7 +437,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   header: {
-    height: 90,
+    height: 56,
     backgroundColor: '#001F3D',
     display: 'flex',
     alignItems: 'center',
@@ -434,25 +452,25 @@ const styles = StyleSheet.create({
   },
   upperLogo: {
     position: 'absolute',
-    height: 70,
-    width: 70,
-    right: 5,
+    height: 50,
+    width: 50,
+    right: 20,
   },
   scrollable: {
-    backgroundColor: '#055772',
+    backgroundColor: 'white',
   },
   basicInfo: {
     marginTop: '10%',
-    width: '70%',
+    width: '80%',
     display: 'flex',
     justifyContent: 'center',
   },
   basicInfoHeader: {
-    color: 'white',
+    color: '#000000',
     textAlign: 'center',
-    fontSize: 25,
+    fontSize: 30,
     fontFamily: 'times new roman',
-    marginBottom: '5%',
+    marginBottom: '10%',
   },
   editButton: {
     backgroundColor: '#09A9C8',

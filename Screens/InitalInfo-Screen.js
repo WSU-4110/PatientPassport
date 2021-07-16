@@ -7,13 +7,16 @@ import {
   Image,
   StyleSheet,
   Alert,
+  StatusBar,
 } from 'react-native';
 import ToggleableText from '../Components/ToggleableText.js';
 import SideMenuToggle from '../Components/SideMenuToggle.js';
 import auth, {firebase} from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import AppTextButton from './components/AppTextButton.js';
+import Colors from './config/Colors.js';
 const InitialInfoScreen = ({navigation}) => {
-  const [isEditingInitalInfo, setIsEditingInitalInfo] = useState(true);
+  const [isEditingInitalInfo, setIsEditingInitalInfo] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [gender, setGender] = useState('');
@@ -55,6 +58,7 @@ const InitialInfoScreen = ({navigation}) => {
         smoke: smoke,
       })
       .then(() => {
+        Alert.alert('User added');
         navigation.navigate('Homescreen');
       });
   };
@@ -127,6 +131,7 @@ const InitialInfoScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor={'#001F3D'} />
       <View style={styles.header}>
         <Image
           style={styles.upperLogo}
@@ -230,15 +235,23 @@ const InitialInfoScreen = ({navigation}) => {
             initText=""
           />
         </View>
-        <TouchableOpacity
-          onPress={() => {
-            if (isEditingInitalInfo) {
-              storeData();
-            }
-          }}
-          style={styles.editButton}>
-          <Text>{isEditingInitalInfo ? 'Save' : 'Edit'}</Text>
-        </TouchableOpacity>
+
+        {/* button */}
+        <View style={{width: '50%', marginBottom: 20, marginTop: 20}}>
+          <AppTextButton
+            name={isEditingInitalInfo ? 'Save' : 'Edit'}
+            borderRadius={10}
+            onSubmit={() => {
+              if (isEditingInitalInfo) {
+                storeData();
+              }
+              setIsEditingInitalInfo(!isEditingInitalInfo);
+            }}
+            backgroundColor={Colors.MidnightBlue}
+            width="100%"
+            height={45}
+          />
+        </View>
       </ScrollView>
     </View>
   );
@@ -262,7 +275,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   header: {
-    height: 90,
+    height: 56,
     backgroundColor: '#001F3D',
     display: 'flex',
     alignItems: 'center',
@@ -277,35 +290,24 @@ const styles = StyleSheet.create({
   },
   upperLogo: {
     position: 'absolute',
-    height: 70,
-    width: 70,
-    right: 5,
+    height: 50,
+    width: 50,
+    right: 20,
   },
   scrollable: {
-    backgroundColor: '#055772',
+    backgroundColor: 'white',
   },
   basicInfo: {
-    marginTop: '10%',
-    width: '70%',
+    marginTop: '7%',
+    width: '80%',
     display: 'flex',
     justifyContent: 'center',
   },
   basicInfoHeader: {
     color: '#000000',
     textAlign: 'center',
-    fontSize: 25,
+    fontSize: 30,
     fontFamily: 'times new roman',
-    marginBottom: '5%',
-  },
-  editButton: {
-    backgroundColor: '#09A9C8',
-    height: 40,
-    width: 100,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 20,
-    borderRadius: 10,
     marginBottom: '10%',
   },
 });
