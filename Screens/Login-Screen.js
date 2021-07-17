@@ -84,9 +84,17 @@ function LoginScreen({navigation}) {
   };
 
   const handleSubmit = async () => {
-    let email = feilds[0].value;
-    let password = feilds[1].value;
-    validateUser(email, password);
+     if(feilds[0].value != '' && feilds[1].value != ''){
+      let email = feilds[0].value;
+      let password = feilds[1].value;
+      validateUser(email, password);
+    }
+// Firebase Auth does not accept empty string a small workaround 
+    else{
+      let email = "empty";
+      let password = "empty";
+      validateUser(email,password);
+     }
   };
 
   return (
