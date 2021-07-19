@@ -6,10 +6,8 @@ current user
 import auth from '@react-native-firebase/auth';
 
 class SingleUser {
-  #firebaseUser;
-
   constructor() {
-    this.#firebaseUser = auth().currentUser;
+    this.firebaseUser = auth().currentUser;
     this.instance = new SingleUser();
   }
 
@@ -18,18 +16,18 @@ class SingleUser {
   }
 
   getEmail() {
-    return this.#firebaseUser.email;
+    return this.firebaseUser.email;
   }
 
   sendEmailVerification() {
-    this.#firebaseUser.sendEmailVerification();
+    this.firebaseUser.sendEmailVerification();
   }
 
   isVerified() {
-    return this.#firebaseUser.emailVerified;
+    return this.firebaseUser.emailVerified;
   }
 
   updateUsername(newUserName) {
-    this.#firebaseUser.updateUsername(newUserName);
+    this.firebaseUser.updateUsername(newUserName);
   }
 }
