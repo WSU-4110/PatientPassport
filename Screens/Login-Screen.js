@@ -54,15 +54,25 @@ function LoginScreen({navigation}) {
           return;
         }
         userID = auth().currentUser.email;
+
         firestore()
-          .collection('users')
+          .collection('clinics')
           .doc(userID)
           .update({email: email})
           .then(() => {
-            navigation.navigate('Homescreen');
+            navigation.navigate('Clinic Homescreen');
           })
           .catch(error => {
-            navigation.navigate('Initial Info');
+            firestore()
+              .collection('users')
+              .doc(userID)
+              .update({email: email})
+              .then(() => {
+                navigation.navigate('Homescreen');
+              })
+              .catch(error => {
+                navigation.navigate('Initial Info');
+              });
           });
       })
       .catch(error => {
@@ -84,17 +94,17 @@ function LoginScreen({navigation}) {
   };
 
   const handleSubmit = async () => {
-     if(feilds[0].value != '' && feilds[1].value != ''){
+    if (feilds[0].value != '' && feilds[1].value != '') {
       let email = feilds[0].value;
       let password = feilds[1].value;
       validateUser(email, password);
     }
-// Firebase Auth does not accept empty string a small workaround 
-    else{
-      let email = "empty";
-      let password = "empty";
-      validateUser(email,password);
-     }
+    // Firebase Auth does not accept empty string a small workaround
+    else {
+      let email = 'empty';
+      let password = 'empty';
+      validateUser(email, password);
+    }
   };
 
   return (
