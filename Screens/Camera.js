@@ -9,23 +9,34 @@ import {
   Alert,
   StatusBar,
 } from 'react-native';
+import QRCodeScanner from 'react-native-qrcode-scanner';
 import ToggleableText from '../Components/ToggleableText.js';
 import SideMenuToggle from '../Components/SideMenuToggle.js';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import AppTextButton from './components/AppTextButton.js';
 
-const ClinicHomescreen = ({navigation}) => {
+const Camera = ({navigation}) => {
+  const barcodeRecognized = async e => {
+    await Alert.alert(e.data);
+  };
   return (
-    <View>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('Camera');
-        }}>
-        <Text>Scan Code</Text>
-      </TouchableOpacity>
-    </View>
+    <QRCodeScanner
+      onRead={barcodeRecognized}
+      checkAndroid6Permissions={true}
+      ref={elem => {
+        this.scanner = elem;
+      }}
+    />
   );
 };
 
-export default ClinicHomescreen;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: 'black',
+  },
+});
+
+export default Camera;
