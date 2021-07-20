@@ -19,6 +19,7 @@ import Colors from './Screens/config/Colors.js';
 import Settings from './Screens/settings.js';
 import ClinicHomescreen from './Screens/ClinicHomescreen.js';
 import Camera from './Screens/Camera.js';
+import GenQRCode from './Screens/GenQRCode.js';
 
 const Drawer = createDrawerNavigator();
 
@@ -69,6 +70,7 @@ const App = () => {
         <Drawer.Screen name="Settings" component={Settings} />
         <Drawer.Screen name="Clinic Homescreen" component={ClinicHomescreen} />
         <Drawer.Screen name="Camera" component={Camera} />
+        <Drawer.Screen name="Generate QR Code" component={GenQRCode} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

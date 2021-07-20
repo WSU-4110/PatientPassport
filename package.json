@@ -25,9 +25,11 @@
     "react-native-gesture-handler": "^1.10.3",
     "react-native-permissions": "^3.0.5",
     "react-native-qrcode-scanner": "^1.5.4",
+    "react-native-qrcode-svg": "^6.1.1",
     "react-native-reanimated": "^2.2.0",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "^3.3.0",
+    "react-native-svg": "^12.1.1",
     "regjsparser": "^0.6.9"
   },
   "devDependencies": {
