@@ -11,6 +11,7 @@ import {
   View,
   ActivityIndicator,
   Alert,
+  Dimensions,
 } from 'react-native';
 
 import AppTextInput from './components/AppTextInput';
@@ -21,7 +22,8 @@ import logo from './assets/img/PatientPassportLogo.png';
 
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import {useEffect} from 'react/cjs/react.development';
+
+const HEIGHT = Dimensions.get('window').height;
 
 /* login and password field functions */
 function LoginScreen({navigation}) {
@@ -54,15 +56,25 @@ function LoginScreen({navigation}) {
           return;
         }
         userID = auth().currentUser.email;
+
         firestore()
-          .collection('users')
+          .collection('clinics')
           .doc(userID)
           .update({email: email})
           .then(() => {
-            navigation.navigate('Homescreen');
+            navigation.navigate('Clinic Homescreen');
           })
           .catch(error => {
-            navigation.navigate('Initial Info');
+            firestore()
+              .collection('users')
+              .doc(userID)
+              .update({email: email})
+              .then(() => {
+                navigation.navigate('Homescreen');
+              })
+              .catch(error => {
+                navigation.navigate('Initial Info');
+              });
           });
       })
       .catch(error => {
@@ -84,9 +96,17 @@ function LoginScreen({navigation}) {
   };
 
   const handleSubmit = async () => {
-    let email = feilds[0].value;
-    let password = feilds[1].value;
-    validateUser(email, password);
+    if (feilds[0].value != '' && feilds[1].value != '') {
+      let email = feilds[0].value;
+      let password = feilds[1].value;
+      validateUser(email, password);
+    }
+    // Firebase Auth does not accept empty string a small workaround
+    else {
+      let email = 'empty';
+      let password = 'empty';
+      validateUser(email, password);
+    }
   };
 
   return (
@@ -121,7 +141,7 @@ function LoginScreen({navigation}) {
       {indicator ? (
         <View
           style={{
-            marginTop: -56,
+            marginTop: -96,
             borderTopLeftRadius: 64,
             backgroundColor: colors.lightGrey,
             width: '100%',
@@ -183,7 +203,13 @@ function LoginScreen({navigation}) {
           </View>
 
           {/* Login text */}
-          <View style={{width: '100%', backgroundColor: colors.lightGrey}}>
+          <View
+            style={{
+              width: '100%',
+              backgroundColor: colors.lightGrey,
+              position: 'absolute',
+              top: HEIGHT - 80,
+            }}>
             {/* Forgot Password Link */}
             <View
               style={{

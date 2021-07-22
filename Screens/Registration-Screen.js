@@ -12,6 +12,8 @@ import {
   StatusBar,
   ActivityIndicator,
 } from 'react-native';
+import CheckBox from '@react-native-community/checkbox';
+import firestore from '@react-native-firebase/firestore';
 import auth, {firebase} from '@react-native-firebase/auth';
 import Colors from './config/Colors';
 import AppTextButton from './components/AppTextButton';
@@ -19,10 +21,9 @@ import AppTextButton from './components/AppTextButton';
 import logo from './assets/img/PatientPassportLogo.png';
 import AppTextInput from './components/AppTextInput';
 
-let {height, width} = Dimensions.get('screen');
-
 const RegistrationScreen = ({navigation}) => {
   const [indicator, setIndicator] = useState(false);
+  const [isClinic, setIsClinic] = useState(false);
   const [feilds, setFeilds] = useState([
     {
       id: 0,
@@ -53,6 +54,10 @@ const RegistrationScreen = ({navigation}) => {
   // !-----------------------------
   const handleSuccessfulRegistration = (email, pass) => {
     //Pushed registration information to the database
+    if (isClinic) {
+      firestore().collection('clinics').doc(email).set({email: email});
+    }
+
     auth()
       .createUserWithEmailAndPassword(email, pass)
       .then(() => {
@@ -159,7 +164,7 @@ const RegistrationScreen = ({navigation}) => {
               {feilds.map((item, i) => (
                 <View
                   key={i}
-                  style={{marginTop: i == 0 ? 80 : 32, width: '100%'}}>
+                  style={{marginTop: i == 0 ? 80 : 20, width: '100%'}}>
                   <AppTextInput
                     placeHolder={item.placeHolder}
                     width="100%"
@@ -170,10 +175,28 @@ const RegistrationScreen = ({navigation}) => {
                 </View>
               ))}
 
+              {/* Clinic Checkbox */}
+              <View
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginTop: 20,
+                  padding: 0,
+                }}>
+                <CheckBox
+                  value={isClinic}
+                  onChange={() => {
+                    setIsClinic(!isClinic);
+                  }}
+                />
+                <Text>I am a clinic</Text>
+              </View>
               {/* SignUp button */}
               <View
                 style={{
-                  marginTop: 40,
+                  marginTop: 30,
                   width: '100%',
                   flex: 1,
                   alignItems: 'flex-end',
