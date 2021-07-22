@@ -243,7 +243,7 @@ function LoginScreen({navigation}) {
                 justifyContent: 'center',
               }}>
               <Text style={{color: 'grey', fontSize: 14}}>
-                Dont't have an account?{' '}
+                Don't have an account?{' '}
               </Text>
               <TouchableOpacity
                 onPress={() => navigation.navigate('Registration')}>

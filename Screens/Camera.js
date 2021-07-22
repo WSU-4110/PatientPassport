@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Alert} from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 
@@ -6,6 +6,8 @@ import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 
 const Camera = ({navigation}) => {
+  const [filters, setFilters] = useState([]);
+
   const barcodeRecognized = async e => {
     // ----------------------------
     // BACKEND - Parses JSON string,
@@ -13,9 +15,18 @@ const Camera = ({navigation}) => {
     //  of DB
     // ----------------------------
     try {
-      console.log(e.data);
       values = JSON.parse(e.data);
-      console.log(values);
+
+      console.log(filters);
+      let toBeStored = {};
+      filters.forEach(filter => {
+        if (values[filter]) {
+          toBeStored[filter] = values[filter];
+        }
+      });
+
+      console.log(toBeStored);
+
       firestore()
         .collection('clinics')
         .doc(auth().currentUser.email)
@@ -42,6 +53,18 @@ const Camera = ({navigation}) => {
       ]);
     }
   };
+
+  useEffect(() => {
+    firestore()
+      .collection('clinics')
+      .doc(auth().currentUser.email)
+      .get()
+      .then(documentSnapshot => {
+        if (documentSnapshot.exists)
+          setFilters(documentSnapshot.data().filters);
+      });
+  });
+
   return (
     <QRCodeScanner
       onRead={barcodeRecognized}

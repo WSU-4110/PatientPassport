@@ -9,6 +9,12 @@ const ClinicHomescreen = ({navigation}) => {
         }}>
         <Text>Scan Code</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('Clinic Filters');
+        }}>
+        <Text>Set Data Filters</Text>
+      </TouchableOpacity>
     </View>
   );
 };
