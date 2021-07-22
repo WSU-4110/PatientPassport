@@ -74,7 +74,7 @@ describe('inital Info Screen Test', function(){
         tester.setDoctors('no');
         tester.setHeart('p');
         tester.setSmoke('no')
-        assert(tester.storeData() == 1 && tester.email)
+        assert(tester.storeData() == 1 && tester.email != '')
     });
 
     });
