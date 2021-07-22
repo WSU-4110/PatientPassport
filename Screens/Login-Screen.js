@@ -11,6 +11,7 @@ import {
   View,
   ActivityIndicator,
   Alert,
+  Dimensions,
 } from 'react-native';
 
 import AppTextInput from './components/AppTextInput';
@@ -21,7 +22,8 @@ import logo from './assets/img/PatientPassportLogo.png';
 
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import {useEffect} from 'react/cjs/react.development';
+
+const HEIGHT = Dimensions.get('window').height;
 
 /* login and password field functions */
 function LoginScreen({navigation}) {
@@ -139,7 +141,7 @@ function LoginScreen({navigation}) {
       {indicator ? (
         <View
           style={{
-            marginTop: -56,
+            marginTop: -96,
             borderTopLeftRadius: 64,
             backgroundColor: colors.lightGrey,
             width: '100%',
@@ -201,7 +203,13 @@ function LoginScreen({navigation}) {
           </View>
 
           {/* Login text */}
-          <View style={{width: '100%', backgroundColor: colors.lightGrey}}>
+          <View
+            style={{
+              width: '100%',
+              backgroundColor: colors.lightGrey,
+              position: 'absolute',
+              top: HEIGHT - 80,
+            }}>
             {/* Forgot Password Link */}
             <View
               style={{

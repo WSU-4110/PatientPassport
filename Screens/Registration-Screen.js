@@ -21,8 +21,6 @@ import AppTextButton from './components/AppTextButton';
 import logo from './assets/img/PatientPassportLogo.png';
 import AppTextInput from './components/AppTextInput';
 
-let {height, width} = Dimensions.get('screen');
-
 const RegistrationScreen = ({navigation}) => {
   const [indicator, setIndicator] = useState(false);
   const [isClinic, setIsClinic] = useState(false);

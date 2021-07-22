@@ -1,16 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {
-  Text,
-  View,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-  StyleSheet,
-  Alert,
-  StatusBar,
-} from 'react-native';
+import {Text, View, TouchableOpacity} from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
-import ToggleableText from '../Components/ToggleableText.js';
 import SideMenuToggle from '../Components/SideMenuToggle.js';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
@@ -20,6 +10,9 @@ const GenQRCode = ({navigation}) => {
   const [values, setValues] = useState({});
   const userID = auth().currentUser.email;
 
+  // ------------------------------
+  // BACKEND - Fetches data from DB
+  // ------------------------------
   useEffect(() => {
     firestore()
       .collection('users')
@@ -28,6 +21,7 @@ const GenQRCode = ({navigation}) => {
         setValues(documentSnapshot.data());
       });
   }, []);
+
   return (
     <View
       style={{
