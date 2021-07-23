@@ -59,7 +59,7 @@ const InitialInfoScreen = ({navigation}) => {
       })
       .then(() => {
         Alert.alert('User added');
-        navigation.navigate('Homescreen');
+        navigation.navigate('Patient Sub Navigator');
       });
   };
 

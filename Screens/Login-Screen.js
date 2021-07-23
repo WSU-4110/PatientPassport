@@ -62,7 +62,7 @@ function LoginScreen({navigation}) {
           .doc(userID)
           .update({email: email})
           .then(() => {
-            navigation.navigate('Clinic Homescreen');
+            navigation.navigate('Clinic Sub Navigator');
           })
           .catch(error => {
             firestore()
@@ -70,7 +70,7 @@ function LoginScreen({navigation}) {
               .doc(userID)
               .update({email: email})
               .then(() => {
-                navigation.navigate('Homescreen');
+                navigation.navigate('Patient Sub Navigator');
               })
               .catch(error => {
                 navigation.navigate('Initial Info');
