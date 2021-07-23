@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   View,
@@ -12,7 +12,6 @@ import {
 import CheckBox from '@react-native-community/checkbox';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-import {useEffect} from 'react/cjs/react.development';
 import SideMenuToggle from '../Components/SideMenuToggle';
 import Colors from './config/Colors';
 

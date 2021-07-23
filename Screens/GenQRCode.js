@@ -28,7 +28,6 @@ const GenQRCode = ({navigation}) => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: Colors.BlueGrotto,
         height: '100%',
       }}>
       <SideMenuToggle navigation={navigation} />
@@ -37,7 +36,7 @@ const GenQRCode = ({navigation}) => {
           fontFamily: 'times new roman',
           fontSize: 30,
           marginBottom: 20,
-          color: 'white',
+          color: 'black',
         }}>
         QR Code
       </Text>

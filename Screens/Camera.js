@@ -27,7 +27,6 @@ const Camera = ({navigation}) => {
     try {
       values = JSON.parse(e.data);
 
-      console.log(filters);
       let toBeStored = {};
       filters.forEach(filter => {
         if (values[filter]) {
@@ -35,22 +34,18 @@ const Camera = ({navigation}) => {
         }
       });
 
-      console.log(toBeStored);
-
       firestore()
         .collection('clinics')
         .doc(auth().currentUser.email)
         .collection('users')
         .doc(values.email)
-        .set(values)
+        .set(toBeStored)
         .then(() => {
           Alert.alert('User info entered.', '', [
             {text: 'OK', onPress: () => scanner.reactivate()},
           ]);
         })
-        .catch(e => {
-          console.log(e);
-        });
+        .catch(e => {});
     } catch (error) {
       console.log(error);
       Alert.alert('Code not recognized', 'Please try again.', [
@@ -73,7 +68,7 @@ const Camera = ({navigation}) => {
         if (documentSnapshot.exists)
           setFilters(documentSnapshot.data().filters);
       });
-  });
+  }, []);
 
   return (
     <View style={styles.container}>
