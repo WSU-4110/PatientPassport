@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import SideMenuToggle from '../Components/SideMenuToggle';
 import Colors from './config/Colors';
+import auth from '@react-native-firebase/auth';
 
 const ClinicHomescreen = ({navigation}) => {
   return (
@@ -36,6 +37,14 @@ const ClinicHomescreen = ({navigation}) => {
           navigation.navigate('Clinic Filters');
         }}>
         <Text style={styles.buttonText}>Set Data Filters</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          auth().signOut();
+          navigation.navigate('Login');
+        }}>
+        <Text style={styles.buttonText}>Log Out</Text>
       </TouchableOpacity>
     </View>
   );
