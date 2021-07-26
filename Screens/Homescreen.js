@@ -15,28 +15,29 @@ import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import AppTextButton from './components/AppTextButton.js';
 import Colors from './config/Colors.js';
+import SearchBar from './SearchBar.js';
 
 const Homescreen = ({navigation}) => {
   const [isEditingBasicInfo, setIsEditingBasicInfo] = useState(false);
   const [isEditingInsurance, setIsEditingInsurance] = useState(false);
   const [values, setValues] = useState({
-    firstName: '',
-    lastName: '',
-    gender: '',
-    address: '',
-    DOB: '',
-    phoneNumber: '',
-    email: '',
-    emergContactName: '',
-    emergContactPhone: '',
-    emergContactEmail: '',
-    insuredName: '',
-    insuredEmployer: '',
-    insuredAddress: '',
-    primaryInsurance: '',
-    insuredID: '',
-    insuranceContact: '',
-    insuranceNotes: '',
+    firstName: '', id: '1',
+    lastName: '', id: '2',
+    gender: '', id: '3',
+    address: '', id: '4',
+    DOB: '', id: '5',
+    phoneNumber: '', id: '6',
+    email: '', id: '7',
+    emergContactName: '', id: '8',
+    emergContactPhone: '', id: '9',
+    emergContactEmail: '', id: '10',
+    insuredName: '', id: '11',
+    insuredEmployer: '', id: '12',
+    insuredAddress: '', id: '13',
+    primaryInsurance: '', id: '14',
+    insuredID: '', id: '15',
+    insuranceContact: '', id: '16',
+    insuranceNotes: '', id: '17',
   });
 
   const userID = auth().currentUser.email;
@@ -243,6 +244,9 @@ const Homescreen = ({navigation}) => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
+        <View style = {styles.searchBarContainer}>
+          <SearchBar/>
+        </View>
         <View style={styles.basicInfo}>
           <Text style={styles.basicInfoHeader}>Basic Information</Text>
           <ToggleableText
@@ -482,6 +486,14 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderRadius: 10,
     marginBottom: '10%',
+  },
+  searchBarContainer: {
+    width: '85%',
+    marginTop: '7%',
+    height: 50, 
+    backgroundColor: "lightgrey", 
+    borderRadius: 18,
+    fontFamily: 'times new roman'
   },
 });
 
