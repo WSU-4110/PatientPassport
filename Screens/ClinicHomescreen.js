@@ -80,7 +80,7 @@ const ClinicHomescreen = ({navigation}) => {
           </Text>
         </View>
 
-        {/* SignUp button */}
+        {/* Scan QR button */}
         <View
           style={{
             marginTop: 60,
@@ -98,6 +98,7 @@ const ClinicHomescreen = ({navigation}) => {
             height={45}
           />
         </View>
+        {/* Scan QR button */}
         <View
           style={{
             marginBottom: 60,
