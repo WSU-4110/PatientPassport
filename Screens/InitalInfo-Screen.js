@@ -137,7 +137,6 @@ const InitialInfoScreen = ({navigation}) => {
           style={styles.upperLogo}
           source={require('../AppDesignDocs/PatientPassport_Logo.png')}
         />
-        <SideMenuToggle navigation={navigation} />
         <Text style={styles.headerText}>Patient Passport</Text>
       </View>
 
