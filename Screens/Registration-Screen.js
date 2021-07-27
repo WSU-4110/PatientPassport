@@ -61,6 +61,7 @@ const RegistrationScreen = ({navigation}) => {
     auth()
       .createUserWithEmailAndPassword(email, pass)
       .then(() => {
+      {/* Sending email verification after account is created */}
         auth().currentUser.sendEmailVerification();
         Alert.alert('Email verification sent!');
         navigation.navigate('Login');
@@ -75,7 +76,8 @@ const RegistrationScreen = ({navigation}) => {
       });
   };
 
-  const onSingup = () => {
+
+  const onSignup = () => {
     setIndicator(true);
 
     let name = feilds[0].value;
@@ -83,6 +85,7 @@ const RegistrationScreen = ({navigation}) => {
     let pass = feilds[2].value;
     let cpass = feilds[3].value;
     console.log('email......: ', name, email, pass, cpass);
+    {/* logic to check all fields are enters and passwords match  */}
     if (name && email && pass && cpass && pass === cpass) {
       handleSuccessfulRegistration(email, pass);
     } else if (pass != cpass)
@@ -204,7 +207,7 @@ const RegistrationScreen = ({navigation}) => {
                 <AppTextButton
                   name="Sign Up"
                   borderRadius={10.4}
-                  onSubmit={() => onSingup()}
+                  onSubmit={() => onSignup()}
                   backgroundColor={Colors.MidnightBlue}
                   width="100%"
                   height={45}
