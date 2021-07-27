@@ -64,12 +64,31 @@ const Settings = ({navigation}) => {
       </View>
       {/* button */}
       <View
-        style={{marginTop: 40, width: '50%', flex: 1, alignItems: 'flex-end'}}>
+        style={{
+          marginTop: 40,
+          width: '50%',
+          height: '40%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
         <AppTextButton
           name="Delete Account"
           borderRadius={10.4}
           onSubmit={() => handlePress()}
           backgroundColor={'#c92222'}
+          width="100%"
+          height={45}
+        />
+        <View style={{height: 20}}></View>
+        <AppTextButton
+          name="Log Out"
+          borderRadius={10.4}
+          onSubmit={() => {
+            auth().signOut();
+            navigation.navigate('Login');
+          }}
+          backgroundColor={Colors.MidnightBlue}
           width="100%"
           height={45}
         />

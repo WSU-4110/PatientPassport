@@ -1,9 +1,21 @@
-import React, {useState} from 'react';
-import {Text, View, TouchableOpacity, ScrollView} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  StyleSheet,
+  Image,
+  StatusBar,
+  Dimensions,
+} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-import {useEffect} from 'react/cjs/react.development';
+import SideMenuToggle from '../Components/SideMenuToggle';
+import Colors from './config/Colors';
+
+const HEIGHT = Dimensions.get('window').height;
 
 const ClinicFilters = ({navigation}) => {
   const [filterList, setFilterList] = useState([
@@ -87,31 +99,126 @@ const ClinicFilters = ({navigation}) => {
   }, []);
 
   return (
-    <ScrollView>
-      <Text>Clinic Filters</Text>
-      {filterList.map((elem, idx) => {
-        return (
-          <View
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-            }}
-            key={idx}>
-            <CheckBox
-              value={elem['active']}
-              onChange={() => {
-                handleChange(elem);
-              }}
-            />
-            <Text>{elem['display']}</Text>
+    <View style={styles.container}>
+      <StatusBar backgroundColor={'#001F3D'} />
+      <View style={styles.header}>
+        <Image
+          style={styles.upperLogo}
+          source={require('../AppDesignDocs/PatientPassport_Logo.png')}
+        />
+        <SideMenuToggle navigation={navigation} />
+        <Text style={styles.headerText}>Patient Passport</Text>
+      </View>
+
+      <View style={styles.scrollContainer}>
+        <ScrollView>
+          <Text style={styles.subHeader}>
+            Select which data to recieve from patients:
+          </Text>
+          {filterList.map((elem, idx) => {
+            return (
+              <View
+                style={{
+                  marginLeft: 20,
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                }}
+                key={idx}>
+                <CheckBox
+                  style={styles.check}
+                  value={elem['active']}
+                  onChange={() => {
+                    handleChange(elem);
+                  }}
+                />
+                <Text style={styles.checkText}>{elem['display']}</Text>
+              </View>
+            );
+          })}
+          <View style={styles.buttonWrapper}>
+            <TouchableOpacity style={styles.saveAndExit} onPress={saveAndExit}>
+              <Text style={styles.buttonText}>Save and Exit</Text>
+            </TouchableOpacity>
           </View>
-        );
-      })}
-      <TouchableOpacity onPress={saveAndExit}>
-        <Text>Save and Exit</Text>
-      </TouchableOpacity>
-    </ScrollView>
+        </ScrollView>
+      </View>
+    </View>
   );
 };
 
 export default ClinicFilters;
+
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    backgroundColor: 'lightgray',
+    height: '100%',
+  },
+  header: {
+    width: '100%',
+    height: 56,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    backgroundColor: '#001F3D',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+  },
+  headerText: {
+    color: 'white',
+    fontSize: 30,
+    fontFamily: 'times new roman',
+  },
+  upperLogo: {
+    position: 'absolute',
+    height: 50,
+    width: 50,
+    right: 20,
+  },
+  scrollContainer: {
+    position: 'absolute',
+    width: '100%',
+    height: HEIGHT - 56,
+    bottom: 0,
+  },
+  subHeader: {
+    marginTop: 15,
+    marginBottom: 15,
+    width: '80%',
+    fontFamily: 'times new roman',
+    fontSize: 20,
+    marginLeft: 20,
+  },
+  check: {
+    height: 40,
+    width: 40,
+  },
+  checkText: {
+    fontSize: 20,
+  },
+  buttonWrapper: {
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  saveAndExit: {
+    margin: 20,
+    height: 50,
+    width: '60%',
+    backgroundColor: Colors.MidnightBlue,
+    borderBottomEndRadius: 10.4,
+    borderTopStartRadius: 10.4,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 20,
+    fontFamily: 'times new roman',
+  },
+});

@@ -89,6 +89,19 @@ const ClinicHomescreen = ({navigation}) => {
         height={45}
       />
     </View>
+    <View style={{ marginTop: 60, width: '80%', flex: 1, alignItems: 'flex-end' }} >
+      <AppTextButton
+        name="Log Out"
+        borderRadius={10.4}
+        onSubmit={() => {
+          auth().signOut();
+          navigation.navigate('Login');
+        }}
+        backgroundColor={Colors.MidnightBlue}
+        width="100%"
+        height={45}
+      />
+    </View>
   </View>
 
 </View >
@@ -106,3 +119,52 @@ const styles = StyleSheet.create({
 })
 
 export default ClinicHomescreen;
+
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'lightgray',
+  },
+  header: {
+    width: '100%',
+    height: 56,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    backgroundColor: '#001F3D',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+  },
+  headerText: {
+    color: 'white',
+    fontSize: 30,
+    fontFamily: 'times new roman',
+  },
+  upperLogo: {
+    position: 'absolute',
+    height: 50,
+    width: 50,
+    right: 20,
+  },
+  button: {
+    backgroundColor: Colors.MidnightBlue,
+    width: '60%',
+    height: 50,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 40,
+    borderBottomEndRadius: 10.4,
+    borderTopStartRadius: 10.4,
+  },
+  buttonText: {
+    fontSize: 20,
+    color: 'white',
+    fontFamily: 'times new roman',
+  },
+});
