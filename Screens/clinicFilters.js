@@ -44,12 +44,6 @@ const ClinicFilters = ({navigation}) => {
     {display: 'Phone Number', id: 12, DBName: 'phoneNumber', active: false},
     {display: 'Smoker', id: 13, DBName: 'smoke', active: false},
     {display: 'Vaccinations', id: 14, DBName: 'vaccinations', active: false},
-    {display: 'Allergies', id: 15, DBName: 'allergies', active: false},
-    {display: 'Allergies', id: 16, DBName: 'allergies', active: false},
-    {display: 'Allergies', id: 17, DBName: 'allergies', active: false},
-    {display: 'Allergies', id: 18, DBName: 'allergies', active: false},
-    {display: 'Allergies', id: 19, DBName: 'allergies', active: false},
-    {display: 'Allergies', id: 20, DBName: 'allergies', active: false},
   ]);
 
   const handleChange = elem => {
