@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Alert,
   StatusBar,
+  TextInput,
 } from 'react-native';
 import ToggleableText from '../Components/ToggleableText.js';
 import SideMenuToggle from '../Components/SideMenuToggle.js';
@@ -15,6 +16,7 @@ import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import AppTextButton from './components/AppTextButton.js';
 import Colors from './config/Colors.js';
+import {ScreenStackHeaderSearchBarView} from 'react-native-screens';
 
 const Homescreen = ({navigation}) => {
   const [isEditingBasicInfo, setIsEditingBasicInfo] = useState(false);
@@ -38,6 +40,7 @@ const Homescreen = ({navigation}) => {
     insuranceContact: '',
     insuranceNotes: '',
   });
+  const [search, setSearch] = useState('');
 
   const userID = auth().currentUser.email;
 
@@ -212,6 +215,263 @@ const Homescreen = ({navigation}) => {
     });
   };
 
+  const renderFirstName = label => {
+    if (label.toLowerCase().includes(search)) {
+      return (
+        <ToggleableText
+          type="First Name"
+          editable={isEditingBasicInfo}
+          callback={updateFirstName}
+          initText={typeof values !== 'undefined' ? values.firstName : ''}
+        />
+      );
+    } else return <View></View>;
+  };
+
+  const renderLastName = label => {
+    if (label.toLowerCase().includes(search)) {
+      return (
+        <ToggleableText
+          type="Last Name"
+          editable={isEditingBasicInfo}
+          callback={updateLastName}
+          initText={typeof values !== 'undefined' ? values.lastName : ''}
+        />
+      );
+    } else return <View></View>;
+  };
+
+  const renderGender = label => {
+    if (label.toLowerCase().includes(search)) {
+      return (
+        <ToggleableText
+          type="Gender"
+          editable={isEditingBasicInfo}
+          callback={updateGender}
+          initText={typeof values !== 'undefined' ? values.gender : ''}
+        />
+      );
+    } else return <View></View>;
+  };
+
+  const renderAddress = label => {
+    if (label.toLowerCase().includes(search)) {
+      return (
+        <ToggleableText
+          type="Address"
+          editable={isEditingBasicInfo}
+          callback={updateAddress}
+          initText={typeof values !== 'undefined' ? values.address : ''}
+        />
+      );
+    } else return <View></View>;
+  };
+
+  const renderDOB = label => {
+    if (label.toLowerCase().includes(search)) {
+      return (
+        <ToggleableText
+          type="Date of Birth"
+          editable={isEditingBasicInfo}
+          callback={updateDOB}
+          initText={typeof values !== 'undefined' ? values.DOB : ''}
+        />
+      );
+    } else return <View></View>;
+  };
+
+  const renderPhoneNumber = label => {
+    if (label.toLowerCase().includes(search)) {
+      return (
+        <ToggleableText
+          type="Phone Number"
+          editable={isEditingBasicInfo}
+          callback={updatePhoneNumber}
+          initText={typeof values !== 'undefined' ? values.phoneNumber : ''}
+        />
+      );
+    } else return <View></View>;
+  };
+
+  const renderEmail = label => {
+    if (label.toLowerCase().includes(search)) {
+      return (
+        <ToggleableText
+          type="Email"
+          editable={isEditingBasicInfo}
+          callback={null}
+          initText={userID}
+        />
+      );
+    } else return <View></View>;
+  };
+
+  const renderEContactName = label => {
+    if (label.toLowerCase().includes(search)) {
+      return (
+        <ToggleableText
+          type="Emergency Contact Name"
+          editable={isEditingBasicInfo}
+          callback={updateEmergContactName}
+          initText={
+            typeof values !== 'undefined' ? values.emergContactName : ''
+          }
+        />
+      );
+    } else return <View></View>;
+  };
+
+  const renderEContactPhone = label => {
+    if (label.toLowerCase().includes(search)) {
+      return (
+        <ToggleableText
+          type="Emergency Contact Phone"
+          editable={isEditingBasicInfo}
+          callback={updateEmergContactPhone}
+          initText={
+            typeof values !== 'undefined' ? values.emergContactPhone : ''
+          }
+        />
+      );
+    } else return <View></View>;
+  };
+
+  const renderEContactEmail = label => {
+    if (label.toLowerCase().includes(search)) {
+      return (
+        <ToggleableText
+          type="Emergency Contact Email"
+          editable={isEditingBasicInfo}
+          callback={updateEmergContactEmail}
+          initText={
+            typeof values !== 'undefined' ? values.emergContactEmail : ''
+          }
+        />
+      );
+    } else return <View></View>;
+  };
+
+  const renderInsuredName = label => {
+    if (label.toLowerCase().includes(search)) {
+      return (
+        <ToggleableText
+          type="Name of Insured Individual"
+          editable={isEditingInsurance}
+          callback={updateInsuredName}
+          initText={typeof values !== 'undefined' ? values.insuredName : ''}
+        />
+      );
+    } else return <View></View>;
+  };
+
+  const renderInsuredDOB = label => {
+    if (label.toLowerCase().includes(search)) {
+      return (
+        <ToggleableText
+          type="Date of Birth"
+          editable={isEditingInsurance}
+          callback={updateInsuredDOB}
+          initText={typeof values !== 'undefined' ? values.insuredDOB : ''}
+        />
+      );
+    } else return <View></View>;
+  };
+
+  const renderEmployer = label => {
+    if (label.toLowerCase().includes(search)) {
+      return (
+        <ToggleableText
+          type="Employer"
+          editable={isEditingInsurance}
+          callback={updateInsuredEmployer}
+          initText={typeof values !== 'undefined' ? values.insuredEmployer : ''}
+        />
+      );
+    } else return <View></View>;
+  };
+
+  const renderInsuredAddress = label => {
+    if (label.toLowerCase().includes(search)) {
+      return (
+        <ToggleableText
+          type="Address"
+          editable={isEditingInsurance}
+          callback={updateInsuredAddress}
+          initText={typeof values !== 'undefined' ? values.insuredAddress : ''}
+        />
+      );
+    } else return <View></View>;
+  };
+
+  const renderInsuranceCompany = label => {
+    if (label.toLowerCase().includes(search)) {
+      return (
+        <ToggleableText
+          type="Primary Insurance Company"
+          editable={isEditingInsurance}
+          callback={updatePrimaryInsurance}
+          initText={
+            typeof values !== 'undefined' ? values.primaryInsurance : ''
+          }
+        />
+      );
+    } else return <View></View>;
+  };
+
+  const renderInsuranceAddress = label => {
+    if (label.toLowerCase().includes(search)) {
+      return (
+        <ToggleableText
+          type="Address"
+          editable={isEditingInsurance}
+          callback={updateInsuranceAddress}
+          initText={typeof values !== 'undefined' ? values.insuranceAdress : ''}
+        />
+      );
+    } else return <View></View>;
+  };
+
+  const renderInsuredID = label => {
+    if (label.toLowerCase().includes(search)) {
+      return (
+        <ToggleableText
+          type="Insured ID"
+          editable={isEditingInsurance}
+          callback={updateInsuredID}
+          initText={typeof values !== 'undefined' ? values.insuredID : ''}
+        />
+      );
+    } else return <View></View>;
+  };
+
+  const renderInsuredContact = label => {
+    if (label.toLowerCase().includes(search)) {
+      return (
+        <ToggleableText
+          type="Contact"
+          editable={isEditingInsurance}
+          callback={updateInsuranceContact}
+          initText={
+            typeof values !== 'undefined' ? values.insuranceContact : ''
+          }
+        />
+      );
+    } else return <View></View>;
+  };
+
+  const renderNotes = label => {
+    if (label.toLowerCase().includes(search)) {
+      return (
+        <ToggleableText
+          type="Notes"
+          editable={isEditingInsurance}
+          callback={updateInsuranceNotes}
+          initText={typeof values !== 'undefined' ? values.insuranceNotes : ''}
+        />
+      );
+    } else return <View></View>;
+  };
+
   //--------------------
   // Gets Data from DB
   //--------------------
@@ -243,74 +503,55 @@ const Homescreen = ({navigation}) => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
+        <View
+          style={{
+            marginTop: 10,
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'row',
+          }}>
+          <TextInput
+            style={styles.searchBar}
+            placeholder="Search"
+            value={search}
+            onChangeText={value => setSearch(value)}
+          />
+          <TouchableOpacity
+            style={{
+              width: 50,
+              height: 50,
+              marginLeft: 5,
+              backgroundColor: Colors.MidnightBlue,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: 10,
+            }}
+            onPress={() => setSearch('')}>
+            <Text
+              style={{
+                color: 'white',
+                fontSize: 35,
+              }}>
+              X
+            </Text>
+          </TouchableOpacity>
+        </View>
+
         <View style={styles.basicInfo}>
           <Text style={styles.basicInfoHeader}>Basic Information</Text>
-          <ToggleableText
-            type="First Name"
-            editable={isEditingBasicInfo}
-            callback={updateFirstName}
-            initText={typeof values !== 'undefined' ? values.firstName : ''}
-          />
-          <ToggleableText
-            type="Last Name"
-            editable={isEditingBasicInfo}
-            callback={updateLastName}
-            initText={typeof values !== 'undefined' ? values.lastName : ''}
-          />
-          <ToggleableText
-            type="Gender"
-            editable={isEditingBasicInfo}
-            callback={updateGender}
-            initText={typeof values !== 'undefined' ? values.gender : ''}
-          />
-          <ToggleableText
-            type="Address"
-            editable={isEditingBasicInfo}
-            callback={updateAddress}
-            initText={typeof values !== 'undefined' ? values.address : ''}
-          />
-          <ToggleableText
-            type="Date of Birth"
-            editable={isEditingBasicInfo}
-            callback={updateDOB}
-            initText={typeof values !== 'undefined' ? values.DOB : ''}
-          />
-          <ToggleableText
-            type="Phone Number"
-            editable={isEditingBasicInfo}
-            callback={updatePhoneNumber}
-            initText={typeof values !== 'undefined' ? values.phoneNumber : ''}
-          />
-          <ToggleableText
-            type="Email"
-            editable={isEditingBasicInfo}
-            callback={null}
-            initText={userID}
-          />
-          <ToggleableText
-            type="Emergency Contact Name"
-            editable={isEditingBasicInfo}
-            callback={updateEmergContactName}
-            initText={
-              typeof values !== 'undefined' ? values.emergContactName : ''
-            }
-          />
-          <ToggleableText
-            type="Emergency Contact Phone"
-            editable={isEditingBasicInfo}
-            callback={updateEmergContactPhone}
-            initText={
-              typeof values !== 'undefined' ? values.emergContactPhone : ''
-            }
-          />
-          <ToggleableText
-            type="Emergency Contact Email"
-            editable={isEditingBasicInfo}
-            callback={updateEmergContactEmail}
-            initText={
-              typeof values !== 'undefined' ? values.emergContactEmail : ''
-            }
-          />
+          {renderFirstName('First Name')}
+          {renderLastName('Last Name')}
+          {renderGender('Gender')}
+          {renderAddress('Address')}
+          {renderDOB('DOB Date Of Birth')}
+          {renderPhoneNumber('Phone Number')}
+          {renderEmail('Email')}
+          {renderEContactName('Emergency Contact Name')}
+          {renderEContactPhone('Emergency Contact Phone')}
+          {renderEContactEmail('Emergency Contact Email')}
         </View>
 
         {/* button */}
@@ -332,72 +573,16 @@ const Homescreen = ({navigation}) => {
 
         <View style={[styles.basicInfo, {marginTop: 5}]}>
           <Text style={styles.basicInfoHeader}>Insurance Information</Text>
-          <ToggleableText
-            type="Name of Insured Individual"
-            editable={isEditingInsurance}
-            callback={updateInsuredName}
-            initText={typeof values !== 'undefined' ? values.insuredName : ''}
-          />
-          <ToggleableText
-            type="Date of Birth"
-            editable={isEditingInsurance}
-            callback={updateInsuredDOB}
-            initText={typeof values !== 'undefined' ? values.insuredDOB : ''}
-          />
-          <ToggleableText
-            type="Employer"
-            editable={isEditingInsurance}
-            callback={updateInsuredEmployer}
-            initText={
-              typeof values !== 'undefined' ? values.insuredEmployer : ''
-            }
-          />
-          <ToggleableText
-            type="Address"
-            editable={isEditingInsurance}
-            callback={updateInsuredAddress}
-            initText={
-              typeof values !== 'undefined' ? values.insuredAddress : ''
-            }
-          />
-          <ToggleableText
-            type="Primary Insurance Company"
-            editable={isEditingInsurance}
-            callback={updatePrimaryInsurance}
-            initText={
-              typeof values !== 'undefined' ? values.primaryInsurance : ''
-            }
-          />
-          <ToggleableText
-            type="Address"
-            editable={isEditingInsurance}
-            callback={updateInsuranceAddress}
-            initText={
-              typeof values !== 'undefined' ? values.insuranceAdress : ''
-            }
-          />
-          <ToggleableText
-            type="Insured ID"
-            editable={isEditingInsurance}
-            callback={updateInsuredID}
-            initText={typeof values !== 'undefined' ? values.insuredID : ''}
-          />
-          <ToggleableText
-            type="Contact"
-            editable={isEditingInsurance}
-            callback={updateInsuranceContact}
-            initText={
-              typeof values !== 'undefined' ? values.insuranceContact : ''
-            }
-          />
-          <ToggleableText
-            type="Notes"
-            editable={isEditingInsurance}
-            callback={updateInsuranceNotes}
-            initText={
-              typeof values !== 'undefined' ? values.insuranceNotes : ''
-            }
-          />
+
+          {renderInsuredName('Insured Name')}
+          {renderInsuredDOB('Insured Date Of Birth DOB')}
+          {renderEmployer('Employer')}
+          {renderInsuredAddress('Insurance address')}
+          {renderInsuranceCompany('primary insurance company')}
+          {renderInsuranceAddress('Insurance address')}
+          {renderInsuredID('insured ID')}
+          {renderInsuredContact('contact')}
+          {renderNotes('Notes')}
         </View>
 
         {/* button */}
@@ -482,6 +667,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderRadius: 10,
     marginBottom: '10%',
+  },
+  searchBar: {
+    width: '80%',
+    borderWidth: 1,
+    borderRadius: 10,
   },
 });
 
