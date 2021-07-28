@@ -12,7 +12,7 @@ Our app has the following functionalities:
 * Users can recover forgotten passwords
 * Users can remove themselves from our system by deleting their account (all patient information is deleted as well) 
 
-## Contributers
+## Contributors
 * [Jeremy Cavallo](https://github.com/jjcavallo5)
 * [Ryan West](https://github.com/rockoverlord23)
 * [Arek Uddin](https://github.com/arekuddin1)
